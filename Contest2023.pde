@@ -5,7 +5,8 @@ ControlPanel myPanel;
 Contest2023_api contest_api;
 int current_turn;
 int last_turn;
-MansonPlan[] ActionPlan = new MansonPlan[6];
+int manson_keyIn;
+MansonPlan[] actionPlan = new MansonPlan[6];
 
 
 void settings()
@@ -22,19 +23,26 @@ void setup()
 {
   myBoard.init_board();
   myPanel = new ControlPanel(this, contest_api.map_width, contest_api.map_height, BoxSize);
+  for(int i=0; i<contest_api.mason_num; i++){
+    actionPlan[i] = new MansonPlan();
+  }
+  myPanel.clear_action_label(contest_api.mason_num);
   last_turn = -2;
+  manson_keyIn = 0;
   current_turn = contest_api.match_turns;
 }
  
 void draw()
 {
-  fill(0, 15);
+  fill(0, 100);
   rect(0,0,width,height);
   myBoard.update();
   contest_api.get_MatchesRequest();
   check_turnUpdate();
   myPanel.set_turns_label(current_turn ,contest_api.total_turns, contest_api.match_isFirst);
   myPanel.set_trunSecond_label(contest_api.match_turnSeconds, contest_api.tooEarly);
+  if(myPanel.get_currentSecond() < 500)
+    contest_api.post_MatchesRequest();
 }
 
 
@@ -43,6 +51,8 @@ void check_turnUpdate(){
   if(current_turn != last_turn)
   {
     myPanel.reset_trunSecond_label();
+    manson_keyIn = 0;
+    myPanel.clear_action_label(contest_api.mason_num);
     println("======================> current_turn = " + str(current_turn));
     for(int i=0; i<contest_api.map_width; i++){
       for(int j=0; j<contest_api.map_height; j++){
@@ -82,68 +92,76 @@ void check_turnUpdate(){
   }
 }
 
-//void keyPressed{
-//  int keyIndex = -1;
-//  for(int i=0;i<6;i++)
-//  ///////////////////////////////////Build///////////////////////////////////
+void keyPressed(){
   
-//    if(key == UP){
-//      inputKey[i].Action = 2;
-//      inputKey[i].Direction = 2;
-//      println("Build Up!!!!")
-//    }
-//    else if (key  == DOWN){ 
-//      inputKey[i].Action = 2;
-//      inputKey[i].Direction = 6;
-//      println("Build Down!!!!")
-//    }
-//    else if (key  == LEFT){
-//      inputKey[i].Action = 2;
-//      inputKey[i].Direction = 8;
-      
-//    }
-//    else if (key  == RIGHT){
-//      inputKey[i].Action = 2;
-//      inputKey[i].Direction = 4;
-//    }
-//    //////////////////////////////////Move//////////////////////////////////////////
-//    else if (key  == 1){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 7;
-//    }
-//    else if (key  == 2){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 6;
-//    }
-//    else if (key  == 3){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 5;
-//    }
-//    else if (key  == 4){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 8;
-//    }
-//    else if (key  == 6){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 4;
-//    }
-//    else if (key  == 7){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 1;
-//    }
-//    else if (key  == 8){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 2;
-//    }
-//    else if (key  == 9){
-//      inputKey[i].Action = 1;
-//      inputKey[i].Direction = 3;
-//    }    
-//    else{
-//      inputKey[i].Action = 0;
-//      inputKey[i].Direction = 0;
-    
-//    }
+  // Space key clear all pressed action
+  if(key == ' '){
+    manson_keyIn = 0;
+    myPanel.clear_action_label(contest_api.mason_num);
+    contest_api.clearActionsArray();
+  }
   
-
-//}
+  //////////////////////////////////Build/Destory//////////////////////////////////////////
+  if(manson_keyIn < contest_api.mason_num){
+    if(keyCode == UP){
+      actionPlan[manson_keyIn].Action = 2;
+      actionPlan[manson_keyIn].Direction = 2;
+      println("Build Up!!!!");
+    }
+    else if (keyCode  == DOWN){ 
+      actionPlan[manson_keyIn].Action = 2;
+      actionPlan[manson_keyIn].Direction = 6;
+      println("Build Down!!!!");
+    }
+    else if (keyCode  == LEFT){
+      actionPlan[manson_keyIn].Action = 2;
+      actionPlan[manson_keyIn].Direction = 8;
+      println("Build Left!!!!");
+    }
+    else if (keyCode  == RIGHT){
+      actionPlan[manson_keyIn].Action = 2;
+      actionPlan[manson_keyIn].Direction = 4;
+      println("Build Right!!!!");
+    }
+    //////////////////////////////////Move//////////////////////////////////////////
+    else if (key  == '1'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 7;
+    }
+    else if (key  == '2'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 6;
+    }
+    else if (key  == '3'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 5;
+    }
+    else if (key  == '4'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 8;
+    }
+    else if (key  == '6'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 4;
+    }
+    else if (key  == '7'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 1;
+    }
+    else if (key  == '8'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 2;
+    }
+    else if (key  == '9'){
+      actionPlan[manson_keyIn].Action = 1;
+      actionPlan[manson_keyIn].Direction = 3;
+    }    
+    else{
+      actionPlan[manson_keyIn].Action = 0;
+      actionPlan[manson_keyIn].Direction = 0;
+    }
+    myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
+    contest_api.appendActionsArray(actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
+    manson_keyIn++;
+  }
+}

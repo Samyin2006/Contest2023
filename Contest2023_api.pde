@@ -16,7 +16,6 @@ class Contest2023_api{
   //String token = "?token=" + "hongkongb6df0142c311d8d44169743c2f21a916ece310e82be067ed9dfa89b8";
   String token = "?token=" + "0987";
   String initMatches_endpoint = url + "/matches" + token ;
-  //String initMatches_endpoint = url + "/matches" ;
   String inGame_Matches_endpoint;
   boolean connection;
   int match_id;
@@ -35,6 +34,7 @@ class Contest2023_api{
   private GetRequest getinitReq;
   private GetRequest getReq;
   private PostRequest postReq;
+  private JSONArray actionsArray;
   
   Structure_Type[][] StructuresArray = new Structure_Type[25][25];
   Wall_Type[][] WallArray = new Wall_Type[25][25];
@@ -43,6 +43,7 @@ class Contest2023_api{
   Contest2023_api(){
     connection = false; 
     tooEarly = false;
+    actionsArray = new JSONArray();
     for(int i=0; i<25; i++)
       for(int j=0; j<25; j++){
         StructuresArray[i][j] = Structure_Type.FREESPACE;
@@ -207,57 +208,38 @@ class Contest2023_api{
     }
   }
   
+  void appendActionsArray(int _type, int _dir){
+    JSONObject action = new JSONObject();
+    action.setInt("type", _type);    //Action type
+    action.setInt("dir", _dir);     //Action Direction
+    actionsArray.append(action);
+  }
+  
+  void clearActionsArray(){
+    actionsArray = new JSONArray();    // Clear the actionsArray 
+  }
   
   void post_MatchesRequest( ){
-    String response = "";
-    
-    //********************************************************
-    // Create a JSON object
-    JSONObject json = new JSONObject();
-    json.setInt("turn", match_turns+1);
-    
-    JSONArray actionsArray = new JSONArray();
-    
-    JSONObject action = new JSONObject();
-    for(int i=0; i<mason_num; i++){
-      action.setInt("type", 1);    //Action type
-      action.setInt("dir", 2);     //Action Direction
-      actionsArray.append(action);
-    }
-   /* 
-    mason_action = 
-    String post_action1 = "{\"turn\": 200,\"actions\": [";
-    for (int i = 0; i < mason_num; i++) {
-      post_action1 += "{\"type\": " + actions[i][0] + ", \"dir\": " + actions[i][1] + "}";
-      if (i < actions.length - 1) {
-        post_action1 += ",";
+    if(actionsArray.size() > 0){
+      String response = "";
+      // Create a JSON object
+      JSONObject json = new JSONObject();
+      json.setInt("turn", match_turns+1);
+      
+      if(actionsArray.size() < mason_num){
+        appendActionsArray(0, 0);
       }
+      json.setJSONArray("actions", actionsArray);
+      postReq.addHeader("Content-Type", "application/json");    // Set the request headers
+      String jsonPayload = json.toString();
+      println("SEND:  " + jsonPayload);
+      postReq.addData(jsonPayload);      // Set the request body with the JSON payload
+      postReq.send();                    // Send the request and receive the response
+      response = postReq.getContent();   // Get the response body
+      println("Response: " + response);  // Print the response
     }
-    post_action1 += "]}";
-    */
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    json.setJSONArray("actions", actionsArray);
-    //********************************************************
-    
-    
-    
-    postReq.addHeader("Content-Type", "application/json");    // Set the request headers
-    String jsonPayload = json.toString();
-    println("SEND:  " + jsonPayload);
-    postReq.addData(jsonPayload);      // Set the request body with the JSON payload
-    postReq.send();                    // Send the request and receive the response
-    response = postReq.getContent();   // Get the response body
-    println("Response: " + response);  // Print the response
-    
+    actionsArray = new JSONArray();    // Clear the actionsArray 
   }
 
 }

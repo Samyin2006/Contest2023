@@ -6,10 +6,4 @@ class Manson{
   {
     manson_ID = _manson_ID;
   }
-  
-  
-  int get_manson_id(){
-    return manson_ID;
-  }
-  
 }
