@@ -1,13 +1,11 @@
 int BoxSize = 40;
 
-
 Board myBoard;
 ControlPanel myPanel;
 Contest2023_api contest_api;
 int current_turn;
 int last_turn;
-Logic_control game_Logic;
-keypad[] inputKey = new keypad[6];
+MansonPlan[] ActionPlan = new MansonPlan[6];
 
 
 void settings()
@@ -26,9 +24,6 @@ void setup()
   myPanel = new ControlPanel(this, contest_api.map_width, contest_api.map_height, BoxSize);
   last_turn = -2;
   current_turn = contest_api.match_turns;
-  
-  //game_Logic = new Logic_control(this);
-  
 }
  
 void draw()
@@ -87,68 +82,68 @@ void check_turnUpdate(){
   }
 }
 
-void keyPressed{
-  int keyIndex = -1;
-  for(int i=0;i<6;i++)
-  ///////////////////////////////////Build///////////////////////////////////
+//void keyPressed{
+//  int keyIndex = -1;
+//  for(int i=0;i<6;i++)
+//  ///////////////////////////////////Build///////////////////////////////////
   
-    if(key == UP){
-      inputKey[i].Action = 2;
-      inputKey[i].Direction = 2;
-      println("Build Up!!!!")
-    }
-    else if (key  == DOWN){ 
-      inputKey[i].Action = 2;
-      inputKey[i].Direction = 6;
-      println("Build Down!!!!")
-    }
-    else if (key  == LEFT){
-      inputKey[i].Action = 2;
-      inputKey[i].Direction = 8;
+//    if(key == UP){
+//      inputKey[i].Action = 2;
+//      inputKey[i].Direction = 2;
+//      println("Build Up!!!!")
+//    }
+//    else if (key  == DOWN){ 
+//      inputKey[i].Action = 2;
+//      inputKey[i].Direction = 6;
+//      println("Build Down!!!!")
+//    }
+//    else if (key  == LEFT){
+//      inputKey[i].Action = 2;
+//      inputKey[i].Direction = 8;
       
-    }
-    else if (key  == RIGHT){
-      inputKey[i].Action = 2;
-      inputKey[i].Direction = 4;
-    }
-    //////////////////////////////////Move//////////////////////////////////////////
-    else if (key  == 1){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 7;
-    }
-    else if (key  == 2){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 6;
-    }
-    else if (key  == 3){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 5;
-    }
-    else if (key  == 4){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 8;
-    }
-    else if (key  == 6){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 4;
-    }
-    else if (key  == 7){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 1;
-    }
-    else if (key  == 8){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 2;
-    }
-    else if (key  == 9){
-      inputKey[i].Action = 1;
-      inputKey[i].Direction = 3;
-    }    
-    else{
-      inputKey[i].Action = 0;
-      inputKey[i].Direction = 0;
+//    }
+//    else if (key  == RIGHT){
+//      inputKey[i].Action = 2;
+//      inputKey[i].Direction = 4;
+//    }
+//    //////////////////////////////////Move//////////////////////////////////////////
+//    else if (key  == 1){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 7;
+//    }
+//    else if (key  == 2){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 6;
+//    }
+//    else if (key  == 3){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 5;
+//    }
+//    else if (key  == 4){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 8;
+//    }
+//    else if (key  == 6){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 4;
+//    }
+//    else if (key  == 7){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 1;
+//    }
+//    else if (key  == 8){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 2;
+//    }
+//    else if (key  == 9){
+//      inputKey[i].Action = 1;
+//      inputKey[i].Direction = 3;
+//    }    
+//    else{
+//      inputKey[i].Action = 0;
+//      inputKey[i].Direction = 0;
     
-    }
+//    }
   
 
-}
+//}

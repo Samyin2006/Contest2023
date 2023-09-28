@@ -1,5 +1,15 @@
 import http.requests.*;
 
+enum Wall_Type { 
+  NO_WALL,
+  RED_WALL, 
+  GREEN_WALL;
+}
+
+enum Structure_Type {
+  FREESPACE, POND, CASTLE;
+}
+
 class Contest2023_api{
   
   String url = "http://127.0.0.1:3000";
@@ -210,8 +220,8 @@ class Contest2023_api{
     
     JSONObject action = new JSONObject();
     for(int i=0; i<mason_num; i++){
-      action.setInt("type", inputKey[i].Action);    //Action type
-      action.setInt("dir", inputKey[i].Direction);     //Action Direction
+      action.setInt("type", 1);    //Action type
+      action.setInt("dir", 2);     //Action Direction
       actionsArray.append(action);
     }
    /* 
