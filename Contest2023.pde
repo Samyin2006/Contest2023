@@ -86,7 +86,7 @@ void check_turnUpdate(){
     myBoard.gridUpdated = true;
   }
 }
-/*
+
 void keyPressed{
   int keyIndex = -1;
   for(int i=0;i<6;i++)
@@ -151,4 +151,4 @@ void keyPressed{
     }
   
 
-}*/
+}
