@@ -5,7 +5,11 @@ class keypad{
   //Constructor
   keypad()
   {
+<<<<<<< Updated upstream
     //This is Sam
+=======
+    // This is yin
+>>>>>>> Stashed changes
   
   }
 
