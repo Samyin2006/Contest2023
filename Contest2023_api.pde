@@ -209,10 +209,12 @@ class Contest2023_api{
   }
   
   void appendActionsArray(int _type, int _dir){
-    JSONObject action = new JSONObject();
-    action.setInt("type", _type);    //Action type
-    action.setInt("dir", _dir);     //Action Direction
-    actionsArray.append(action);
+    if(actionsArray.size() < mason_num){
+      JSONObject action = new JSONObject();
+      action.setInt("type", _type);    //Action type
+      action.setInt("dir", _dir);     //Action Direction
+      actionsArray.append(action);
+    }
   }
   
   void clearActionsArray(){

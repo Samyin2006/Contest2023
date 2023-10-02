@@ -13,6 +13,7 @@ class ControlPanel{
   int board_height;
   int board_width;
   int remainMillisSec;
+  boolean my_turn;
 
   
   ControlPanel(PApplet _applet, int _board_width, int _board_height ,int _BoxSize){
@@ -22,6 +23,7 @@ class ControlPanel{
     button_width = BoxSize * 3;
     board_height = _board_height;
     board_width = _board_width;
+    my_turn = false;
     
     controlPanel_CP5 = new ControlP5(my_applet);
     timer = new ControlTimer();
@@ -82,17 +84,25 @@ class ControlPanel{
   void set_turns_label( int _currentTurn, int _total_turns , boolean _isFirst ){
     turns_label.setText( str(_currentTurn) + "/" + str(_total_turns) );
     if(_isFirst){
-      if(_currentTurn%2 == 0)
+      if(_currentTurn%2 == 0){
         turns_label.setColor(color(255, 0, 0));
-      else
+        my_turn = true;
+      }
+      else{
         turns_label.setColor(color(0, 255, 0));
+        my_turn = false;
+      }
     }
     else
     {
-      if(_currentTurn%2 == 0)
+      if(_currentTurn%2 == 0){
         turns_label.setColor(color(0, 255, 0));
-      else
+        my_turn = false;
+      }
+      else{
         turns_label.setColor(color(255, 0, 0));
+        my_turn = true;
+      }
     }
       
   }

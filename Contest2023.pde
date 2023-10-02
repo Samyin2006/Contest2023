@@ -41,7 +41,7 @@ void draw()
   check_turnUpdate();
   myPanel.set_turns_label(current_turn ,contest_api.total_turns, contest_api.match_isFirst);
   myPanel.set_trunSecond_label(contest_api.match_turnSeconds, contest_api.tooEarly);
-  if(myPanel.get_currentSecond() < 500)
+  if(myPanel.get_currentSecond() < 500 && myPanel.my_turn == true)
     contest_api.post_MatchesRequest();
 }
 
@@ -50,9 +50,6 @@ void check_turnUpdate(){
   current_turn = contest_api.match_turns;
   if(current_turn != last_turn)
   {
-    myPanel.reset_trunSecond_label();
-    manson_keyIn = 0;
-    myPanel.clear_action_label(contest_api.mason_num);
     println("======================> current_turn = " + str(current_turn));
     for(int i=0; i<contest_api.map_width; i++){
       for(int j=0; j<contest_api.map_height; j++){
@@ -87,6 +84,12 @@ void check_turnUpdate(){
       }
     }
     
+    myPanel.reset_trunSecond_label();
+    if(myPanel.my_turn == true){
+      manson_keyIn = 0;
+      myPanel.clear_action_label(contest_api.mason_num);
+      contest_api.clearActionsArray();
+    }
     last_turn = current_turn;
     myBoard.gridUpdated = true;
   }
@@ -99,6 +102,7 @@ void keyPressed(){
     manson_keyIn = 0;
     myPanel.clear_action_label(contest_api.mason_num);
     contest_api.clearActionsArray();
+    return;
   }
   
   //////////////////////////////////Build/Destory//////////////////////////////////////////
