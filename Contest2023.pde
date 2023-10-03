@@ -97,7 +97,7 @@ void check_turnUpdate(){
 }
 
 void keyReleased(){
-  if(key >= 0xFFFF)
+  if(key >= 0xFFFF && keyCode != UP && keyCode != DOWN && keyCode != LEFT && keyCode != RIGHT )
     return;
   
   // Space key clear all pressed action
@@ -163,7 +163,7 @@ void keyReleased(){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 3;
     }    
-    else if (key == '0'){
+    else if (key == '0' || key == '5'){
       actionPlan[manson_keyIn].Action = 0;
       actionPlan[manson_keyIn].Direction = 0;
     }
