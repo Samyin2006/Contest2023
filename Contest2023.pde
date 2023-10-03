@@ -95,7 +95,9 @@ void check_turnUpdate(){
   }
 }
 
-void keyPressed(){
+void keyReleased(){
+  if(key >= 0xFFFF)
+    return;
   
   // Space key clear all pressed action
   if(key == ' '){
@@ -104,7 +106,7 @@ void keyPressed(){
     contest_api.clearActionsArray();
     return;
   }
-  
+ 
   //////////////////////////////////Build/Destory//////////////////////////////////////////
   if(manson_keyIn < contest_api.mason_num){
     if(keyCode == UP){
@@ -160,7 +162,7 @@ void keyPressed(){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 3;
     }    
-    else{
+    else if (key == '0'){
       actionPlan[manson_keyIn].Action = 0;
       actionPlan[manson_keyIn].Direction = 0;
     }
