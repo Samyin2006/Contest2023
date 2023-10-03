@@ -52,7 +52,7 @@ class Contest2023_api{
       }
   }
   
-  void get_initMatchesRequest(){
+  boolean get_initMatchesRequest(){
     println("Endpoint = " + initMatches_endpoint);
     getinitReq = new GetRequest(initMatches_endpoint);
     getinitReq.send();
@@ -136,6 +136,7 @@ class Contest2023_api{
        println("Server cannot connect");
        connection = false;
     }
+    return connection;
   }
   
   void get_MatchesRequest(){

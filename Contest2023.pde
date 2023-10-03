@@ -12,7 +12,8 @@ MansonPlan[] actionPlan = new MansonPlan[6];
 void settings()
 {
   contest_api = new Contest2023_api();
-  contest_api.get_initMatchesRequest();
+  while( !contest_api.get_initMatchesRequest() )
+    delay(100);
   BoxSize = (displayHeight) / (contest_api.map_height+2);
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
   //size(myBoard.width(), myBoard.height());
