@@ -97,8 +97,10 @@ void check_turnUpdate(){
 }
 
 void keyReleased(){
+  //for external keypad
   if(key >= 0xFFFF && keyCode != UP && keyCode != DOWN && keyCode != LEFT && keyCode != RIGHT )
     return;
+    
   
   // Space key clear all pressed action
   if(key == ' '){
