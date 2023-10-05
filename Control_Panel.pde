@@ -98,6 +98,17 @@ class ControlPanel{
     }
   }
   
+  void clear_one_action(int manson_num){
+    if(manson_num <  contest_api.mason_num){
+      action_label[manson_num].setText(str(manson_num+1) + ":");
+    }
+  }
+  
+  
+  
+  
+  
+  
   void set_turns_label( int _currentTurn, int _total_turns , boolean _isFirst ){
     if(_currentTurn < 0){
       if(_isFirst){

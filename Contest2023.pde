@@ -102,6 +102,9 @@ void check_turnUpdate(){
   }
 }
 
+
+ 
+ 
  
 void clearAllActions(){
   for(int i=0; i<contest_api.mason_num; i++){
@@ -130,7 +133,44 @@ void keyReleased(){
     clearAllActions();
     return;
   }
- 
+  //Clear one action by pressing Q,W,E,R,T,Y seperately
+  if(key == 'Q' || key == 'q'){
+    manson_keyIn = 0;
+    myPanel.clear_one_action(0);
+    clearMansonActions(1);
+    return;
+  }
+  else if(key == 'W' || key == 'w'){
+    manson_keyIn = 1;
+    myPanel.clear_one_action(1);
+    clearMansonActions(2);
+    return;
+  } 
+  else if(key == 'E' || key == 'e'){
+    manson_keyIn = 2;
+    myPanel.clear_one_action(2);
+    clearMansonActions(3);
+    return;
+  } 
+  else if(key == 'R' || key == 'r'){
+    manson_keyIn = 3;
+    myPanel.clear_one_action(3);
+    clearMansonActions(4);
+    return;
+  } 
+  else if(key == 'T' || key == 't'){
+    manson_keyIn = 4;
+    myPanel.clear_one_action(4);
+    clearMansonActions(5);
+    return;
+  } 
+  else if(key == 'Y' || key == 'y'){
+    manson_keyIn = 5;
+    myPanel.clear_one_action(5);
+    clearMansonActions(6);
+    return;
+  }
+  
   //////////////////////////////////Build/Destory//////////////////////////////////////////
   if(manson_keyIn < contest_api.mason_num){
     if(keyCode == UP){
