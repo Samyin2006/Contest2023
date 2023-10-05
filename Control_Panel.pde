@@ -6,6 +6,7 @@ class ControlPanel{
   Textlabel trunSecond_label;
   Textlabel turns_label;
   Textlabel[] action_label = new Textlabel[6];
+  Textlabel[] mansonPos_label = new Textlabel[6];
   
   PFont font;
   int button_height;
@@ -40,7 +41,7 @@ class ControlPanel{
     
     trunSecond_label = controlPanel_CP5.addTextlabel("turnsSecond_label")
                                   .setText("0.0 sec / 0.0 sec")
-                                  .setPosition((board_width+2)*BoxSize, BoxSize*2)
+                                  .setPosition((board_width+2)*BoxSize, BoxSize*3)
                                   .setColorValue(0xffffffff)
                                   .setFont(createFont("Arial",30))
                                   ;
@@ -48,10 +49,18 @@ class ControlPanel{
     for(int i=0; i<6 ;i++){
       action_label[i] = controlPanel_CP5.addTextlabel("action_label" + str(i))
                                     .setText("")
-                                    .setPosition((board_width+2)*BoxSize, BoxSize*(4+i))
+                                    .setPosition((board_width+2)*BoxSize + 150, BoxSize*(5+i))
                                     .setColorValue(0xffffffff)
                                     .setFont(createFont("Arial",30))
                                     ;
+      
+      mansonPos_label[i] = controlPanel_CP5.addTextlabel("mansonPos_label" + str(i))
+                                    .setText("")
+                                    .setPosition((board_width+2)*BoxSize, BoxSize*(5+i))
+                                    .setColorValue(0xffffffff)
+                                    .setFont(createFont("Arial",30))
+                                    ;
+      
     }
     
     postbutton = controlPanel_CP5.addButton( "POST" ) //Create button with ID
@@ -72,9 +81,12 @@ class ControlPanel{
   }
   
   void set_action_label(int mansionIndex, String real_action){
-    action_label[mansionIndex].setText( str(mansionIndex) + ": " + real_action );
+    action_label[mansionIndex].setText( str(mansionIndex+1) + ": " + real_action );
   }
   
+  void set_manson_pos_label(int mansionIndex, int _x, int _y){
+    mansonPos_label[mansionIndex].setText( "[" + str(_x) + "," + str(_y) + "]");
+  }
   
   //void set_action_label(int mansionIndex, int action, int direction){
   //  action_label[mansionIndex].setText( str(mansionIndex) + ": " + str(action) + " , " + str(direction) );
@@ -82,31 +94,43 @@ class ControlPanel{
   
   void clear_action_label(int manson_num){
     for(int i=0; i<manson_num; i++){
-      action_label[i].setText(str(i) + ":");
+      action_label[i].setText(str(i+1) + ":");
     }
   }
   
   void set_turns_label( int _currentTurn, int _total_turns , boolean _isFirst ){
-    turns_label.setText( str(_currentTurn) + "/" + str(_total_turns) );
-    if(_isFirst){
-      if(_currentTurn%2 == 0){
+    if(_currentTurn < 0){
+      if(_isFirst){
         turns_label.setColor(color(255, 0, 0));
-        my_turn = true;
+        turns_label.setText( "First Hand" );
       }
       else{
         turns_label.setColor(color(0, 255, 0));
-        my_turn = false;
+        turns_label.setText( "Second Hand" );
       }
     }
-    else
-    {
-      if(_currentTurn%2 == 0){
-        turns_label.setColor(color(0, 255, 0));
-        my_turn = false;
+    else{
+      turns_label.setText( str(_currentTurn) + "/" + str(_total_turns) );
+      if(_isFirst){
+        if(_currentTurn%2 == 0){
+          turns_label.setColor(color(255, 0, 0));
+          my_turn = true;
+        }
+        else{
+          turns_label.setColor(color(0, 255, 0));
+          my_turn = false;
+        }
       }
-      else{
-        turns_label.setColor(color(255, 0, 0));
-        my_turn = true;
+      else
+      {
+        if(_currentTurn%2 == 0){
+          turns_label.setColor(color(0, 255, 0));
+          my_turn = false;
+        }
+        else{
+          turns_label.setColor(color(255, 0, 0));
+          my_turn = true;
+        }
       }
     }
       

@@ -48,8 +48,6 @@ class Board{
       stroke(0, 204, 153);
       fill(0, 204, 153);
       rect(0,0,width,height);
-      //rect(offset_xPos, offset_yPos, numOfHorizontal*sizePerBox+spaceBetweenBox, numOfVertical*sizePerBox+spaceBetweenBox);
-      //line(2 * offset_xPos + numOfHorizontal * sizePerBox, 0, 2 * offset_xPos + numOfHorizontal * sizePerBox, height);
       //update
       for(int i=0; i<numOfHorizontal; i++){
         for(int j=0; j<numOfVertical; j++){

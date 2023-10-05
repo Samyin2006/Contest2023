@@ -12,7 +12,8 @@ enum Structure_Type {
 
 class Contest2023_api{
   
-  String url = "http://192.168.1.96:3000";
+  //String url = "http://192.168.1.96:3000";
+  String url = "http://localhost:3000";
   //String token = "?token=" + "hongkongb6df0142c311d8d44169743c2f21a916ece310e82be067ed9dfa89b8";
   String token = "?token=" + "1234";
   String initMatches_endpoint = url + "/matches" + token ;
@@ -35,19 +36,25 @@ class Contest2023_api{
   private GetRequest getReq;
   private PostRequest postReq;
   
-  Structure_Type[][] StructuresArray = new Structure_Type[25][25];
-  Wall_Type[][] WallArray = new Wall_Type[25][25];
-  Manson[][] MansonArray = new Manson[25][25];
+  Structure_Type[][] StructuresArray = new Structure_Type[25][25];  //Collect the Struction information from server
+  Wall_Type[][] WallArray = new Wall_Type[25][25];                  //Collect the Wall information from server
+  Manson[][] MansonArray = new Manson[25][25];                      //Collect the Manson information from server
+  MansonPosition[] MansonPos = new MansonPosition[6];               //Record all manson position
   
   Contest2023_api(){
     connection = false; 
     tooEarly = false;
-    for(int i=0; i<25; i++)
+    for(int i=0; i<25; i++){
       for(int j=0; j<25; j++){
         StructuresArray[i][j] = Structure_Type.FREESPACE;
         WallArray[i][j] = Wall_Type.NO_WALL;
         MansonArray[i][j] = new Manson(0);
       }
+    }
+    
+    for(int k=0; k<6; k++)
+      MansonPos[k] = new MansonPosition();
+    
   }
   
   boolean get_initMatchesRequest(){
@@ -109,6 +116,9 @@ class Contest2023_api{
               MansonArray[j][i].manson_ID = rowArray.getInt(j);
             else
               MansonArray[j][i].manson_ID = rowArray.getInt(j)*(-1);
+              
+            if(MansonArray[j][i].manson_ID > 0)
+              MansonPos[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
           }
         }
       
@@ -195,6 +205,8 @@ class Contest2023_api{
           JSONArray rowArray = manson.getJSONArray(i);
           for (int j = 0; j < map_width; j++) {
               MansonArray[j][i].manson_ID = rowArray.getInt(j);
+              if(MansonArray[j][i].manson_ID > 0)
+                MansonPos[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
           }
         }
       }

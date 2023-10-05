@@ -88,17 +88,21 @@ void check_turnUpdate(){
       }
     }
     
-    myPanel.reset_trunSecond_label();
-    if(myPanel.my_turn == true){
+    myPanel.reset_trunSecond_label();             // Reset Timer 
+    for(int i=0; i<contest_api.mason_num; i++)    // Display Manson location
+      myPanel.set_manson_pos_label(i, contest_api.MansonPos[i].xPos, contest_api.MansonPos[i].yPos);    
+    
+    if(myPanel.my_turn == true){                  // Clear Manson Action Plan
       manson_keyIn = 0;
       myPanel.clear_action_label(contest_api.mason_num);
       clearAllActions();
     }
     last_turn = current_turn;
-    myBoard.gridUpdated = true;
+    myBoard.gridUpdated = true;                    // Update grid display
   }
 }
 
+ 
 void clearAllActions(){
   for(int i=0; i<contest_api.mason_num; i++){
     actionPlan[i].Action = 0;
