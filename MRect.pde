@@ -84,6 +84,8 @@ class MRect {
         break;
       case FREESPACE:
       default:
+        font = createFont("Courier New",8);
+        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[0]);
         break;
     }
