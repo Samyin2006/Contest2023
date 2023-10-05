@@ -14,10 +14,13 @@ void settings()
   contest_api = new Contest2023_api();
   while( !contest_api.get_initMatchesRequest() )
     delay(100);
+  
   BoxSize = (displayHeight) / (contest_api.map_height+2);
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
   //size(myBoard.width(), myBoard.height());
   fullScreen();
+  
+  
 }
   
 void setup()
@@ -129,61 +132,75 @@ void keyReleased(){
     if(keyCode == UP){
       actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 2;
+      actionPlan[manson_keyIn].real_action = "BUILD UP";
       println("Build Up!!!!");
     }
     else if (keyCode  == DOWN){ 
       actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 6;
+      actionPlan[manson_keyIn].real_action = "BUILD DOWN";
       println("Build Down!!!!");
     }
     else if (keyCode  == LEFT){
       actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 8;
+      actionPlan[manson_keyIn].real_action = "BUILD LEFT";
       println("Build Left!!!!");
     }
     else if (keyCode  == RIGHT){
       actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 4;
+      actionPlan[manson_keyIn].real_action = "BUILD RIGHT";
       println("Build Right!!!!");
     }
     //////////////////////////////////Move//////////////////////////////////////////
     else if (key  == '1'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 7;
+      actionPlan[manson_keyIn].real_action = "MOVE BOTTOM LEFT";
     }
     else if (key  == '2'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 6;
+      actionPlan[manson_keyIn].real_action = "MOVE DOWN";
     }
     else if (key  == '3'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 5;
+      actionPlan[manson_keyIn].real_action = "MOVE BOTTOM RIGHT";
     }
     else if (key  == '4'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 8;
+      actionPlan[manson_keyIn].real_action = "MOVE LEFT";
     }
     else if (key  == '6'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 4;
+      actionPlan[manson_keyIn].real_action = "MOVE RIGHT";
     }
     else if (key  == '7'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 1;
+      actionPlan[manson_keyIn].real_action = "MOVE TOP LEFT";
     }
     else if (key  == '8'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 2;
+      actionPlan[manson_keyIn].real_action = "MOVE UP";
     }
     else if (key  == '9'){
       actionPlan[manson_keyIn].Action = 1;
       actionPlan[manson_keyIn].Direction = 3;
+      actionPlan[manson_keyIn].real_action = "MOVE TOP RIGHT";
     }    
     else if (key == '0' || key == '5'){
       actionPlan[manson_keyIn].Action = 0;
       actionPlan[manson_keyIn].Direction = 0;
+      actionPlan[manson_keyIn].real_action = "HOLD";
     }
-    myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
+    myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].real_action);
+    //myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
     manson_keyIn++;
   }
 }

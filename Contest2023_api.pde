@@ -12,9 +12,9 @@ enum Structure_Type {
 
 class Contest2023_api{
   
-  String url = "http://127.0.0.1:3000";
+  String url = "http://192.168.1.96:3000";
   //String token = "?token=" + "hongkongb6df0142c311d8d44169743c2f21a916ece310e82be067ed9dfa89b8";
-  String token = "?token=" + "0987";
+  String token = "?token=" + "1234";
   String initMatches_endpoint = url + "/matches" + token ;
   String inGame_Matches_endpoint;
   boolean connection;

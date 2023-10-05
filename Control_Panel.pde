@@ -71,9 +71,14 @@ class ControlPanel{
       contest_api.post_MatchesRequest();
   }
   
-  void set_action_label(int mansionIndex, int action, int direction){
-    action_label[mansionIndex].setText( str(mansionIndex) + ": " + str(action) + " , " + str(direction) );
+  void set_action_label(int mansionIndex, String real_action){
+    action_label[mansionIndex].setText( str(mansionIndex) + ": " + real_action );
   }
+  
+  
+  //void set_action_label(int mansionIndex, int action, int direction){
+  //  action_label[mansionIndex].setText( str(mansionIndex) + ": " + str(action) + " , " + str(direction) );
+  //}
   
   void clear_action_label(int manson_num){
     for(int i=0; i<manson_num; i++){

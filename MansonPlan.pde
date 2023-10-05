@@ -1,12 +1,14 @@
 class MansonPlan{
   int Action;
   int Direction;
+  String real_action;
   
   //Constructor
   MansonPlan()
   {
     Action = 0;
     Direction = 0;
+    real_action = "";
   }
 }
 
