@@ -173,30 +173,68 @@ void keyReleased(){
   
   //////////////////////////////////Build/Destory//////////////////////////////////////////
   if(manson_keyIn < contest_api.mason_num){
+    int pos_x = contest_api.MansonPos[manson_keyIn].xPos;
+    int pos_y = contest_api.MansonPos[manson_keyIn].yPos;
+    
     if(keyCode == UP){
-      actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 2;
-      actionPlan[manson_keyIn].real_action = "BUILD UP";
-      println("Build Up!!!!");
+      if(contest_api.WallArray[pos_x][pos_y-1] == Wall_Type.GREEN_WALL){
+        actionPlan[manson_keyIn].Action = 3;  
+        actionPlan[manson_keyIn].real_action = "Destroy UP";
+        println("Destroy Up!!!!");
+      }
+      else{
+        actionPlan[manson_keyIn].Action = 2;
+        actionPlan[manson_keyIn].real_action = "BUILD UP";
+        println("Build Up!!!!");
+      }
+
     }
     else if (keyCode  == DOWN){ 
-      actionPlan[manson_keyIn].Action = 2;
+      
       actionPlan[manson_keyIn].Direction = 6;
-      actionPlan[manson_keyIn].real_action = "BUILD DOWN";
-      println("Build Down!!!!");
+      if(contest_api.WallArray[pos_x][pos_y+1] == Wall_Type.GREEN_WALL){
+        actionPlan[manson_keyIn].Action = 3;  
+        actionPlan[manson_keyIn].real_action = "Destroy DOWN";
+        println("Destroy DOWN!!!!");
+      }
+      else{
+        actionPlan[manson_keyIn].Action = 2;
+        actionPlan[manson_keyIn].real_action = "BUILD DOWN";
+        println("Build DOWN!!!!");
+      }
+  
     }
     else if (keyCode  == LEFT){
-      actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 8;
-      actionPlan[manson_keyIn].real_action = "BUILD LEFT";
-      println("Build Left!!!!");
+      if(contest_api.WallArray[pos_x-1][pos_y] == Wall_Type.GREEN_WALL){
+        actionPlan[manson_keyIn].Action = 3;  
+        actionPlan[manson_keyIn].real_action = "Destroy LEFT";
+        println("Destroy LEFT!!!!");
+      }
+      else{
+        actionPlan[manson_keyIn].Action = 2;
+        actionPlan[manson_keyIn].real_action = "BUILD LEFT";
+        println("Build LEFT!!!!");
+      }
+
     }
     else if (keyCode  == RIGHT){
-      actionPlan[manson_keyIn].Action = 2;
       actionPlan[manson_keyIn].Direction = 4;
-      actionPlan[manson_keyIn].real_action = "BUILD RIGHT";
-      println("Build Right!!!!");
+      if(contest_api.WallArray[pos_x-1][pos_y] == Wall_Type.GREEN_WALL){
+        actionPlan[manson_keyIn].Action = 3;  
+        actionPlan[manson_keyIn].real_action = "Destroy RIGHT";
+        println("Destroy RIGHT!!!!");
+      }
+      else{
+        actionPlan[manson_keyIn].Action = 2;
+        actionPlan[manson_keyIn].real_action = "BUILD RIGHT";
+        println("Build RIGHT!!!!");
+      }
     }
+    
+    
+    
     //////////////////////////////////Move//////////////////////////////////////////
     else if (key  == '1'){
       actionPlan[manson_keyIn].Action = 1;
