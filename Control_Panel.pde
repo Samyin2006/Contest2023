@@ -42,7 +42,7 @@ class ControlPanel{
                                   .setText("0.0 sec / 0.0 sec")
                                   .setPosition((board_width+2)*BoxSize, BoxSize*2)
                                   .setColorValue(0xffffffff)
-                                  .setFont(createFont("Arial",26))
+                                  .setFont(createFont("Arial",30))
                                   ;
     
     for(int i=0; i<6 ;i++){
@@ -50,7 +50,7 @@ class ControlPanel{
                                     .setText("")
                                     .setPosition((board_width+2)*BoxSize, BoxSize*(4+i))
                                     .setColorValue(0xffffffff)
-                                    .setFont(createFont("Arial",26))
+                                    .setFont(createFont("Arial",30))
                                     ;
     }
     

@@ -28,7 +28,7 @@ class MRect {
     rect_type = _type;
 
     myCP5 = new ControlP5(my_applet);
-    font = createFont("Courier New",15);
+    font = createFont("Courier New",sq_size/3);
      
     button = myCP5.addButton( str(index_x) + "," + str(index_y) ) //Create button with ID
                   .plugTo(this, "btn_click")                      //Link this button event to "btn_click" function
@@ -65,18 +65,16 @@ class MRect {
         break;
       case CASTLE:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[2]);
-        font = createFont("Courier New",8);
+        font = createFont("Courier New",sq_size/4);
         myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setCaptionLabel("Castle");
         myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);
         break;
       case RED_MANSON:  
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[3]);
-        //this.setCaptionLabel(str(manson_ID));
         break;
       case GREEN_MANSON:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[4]);
-        //this.setCaptionLabel(str(manson_ID));
         break;
       case RED_WALL:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[5]);
@@ -94,6 +92,11 @@ class MRect {
   
   
   void setCaptionLabel(String str){
+    if(str.length() < 4)
+      font = createFont("Arial",sq_size/1.5,true);
+    else
+      font = createFont("Courier New",sq_size/2);
+    myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
     myCP5.getController(str(index_x) + "," + str(index_y)).setCaptionLabel(str);
     myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);
   }

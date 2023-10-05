@@ -16,6 +16,7 @@ void settings()
     delay(100);
   BoxSize = (displayHeight) / (contest_api.map_height+2);
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
+  //myBoard = new Board(this, 11, 11, BoxSize);
   //size(myBoard.width(), myBoard.height());
   fullScreen();
 }
