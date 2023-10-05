@@ -34,7 +34,6 @@ class Contest2023_api{
   private GetRequest getinitReq;
   private GetRequest getReq;
   private PostRequest postReq;
-  private JSONArray actionsArray;
   
   Structure_Type[][] StructuresArray = new Structure_Type[25][25];
   Wall_Type[][] WallArray = new Wall_Type[25][25];
@@ -43,7 +42,6 @@ class Contest2023_api{
   Contest2023_api(){
     connection = false; 
     tooEarly = false;
-    actionsArray = new JSONArray();
     for(int i=0; i<25; i++)
       for(int j=0; j<25; j++){
         StructuresArray[i][j] = Structure_Type.FREESPACE;
@@ -150,13 +148,9 @@ class Contest2023_api{
         JSONObject response = parseJSONObject(getReq.getContent());
         
         // Access the values from the JSON object
-        //int id = response.getInt("id");
         match_turns = response.getInt("turn");
         
         JSONObject board = response.getJSONObject("board");
-        //int width = board.getInt("width");
-        //int height = board.getInt("height");
-        //int mason = board.getInt("mason");
         
         JSONArray structures = board.getJSONArray("structures");
         for (int i = 0; i < map_height; i++) {
@@ -209,29 +203,22 @@ class Contest2023_api{
     }
   }
   
-  void appendActionsArray(int _type, int _dir){
-    if(actionsArray.size() < mason_num){
-      JSONObject action = new JSONObject();
-      action.setInt("type", _type);    //Action type
-      action.setInt("dir", _dir);     //Action Direction
-      actionsArray.append(action);
-    }
-  }
-  
-  void clearActionsArray(){
-    actionsArray = new JSONArray();    // Clear the actionsArray 
-  }
   
   void post_MatchesRequest( ){
-    if(actionsArray.size() > 0){
+      JSONArray actionsArray = new JSONArray();    // Clear the actionsArray 
+      
       String response = "";
       // Create a JSON object
       JSONObject json = new JSONObject();
       json.setInt("turn", match_turns+1);
       
-      if(actionsArray.size() < mason_num){
-        appendActionsArray(0, 0);
+      for(int i=0; i<mason_num; i++ ){
+        JSONObject action = new JSONObject();
+        action.setInt("type", actionPlan[i].Action);    //Action type
+        action.setInt("dir", actionPlan[i].Direction);     //Action Direction
+        actionsArray.append(action);
       }
+      
       json.setJSONArray("actions", actionsArray);
       postReq.addHeader("Content-Type", "application/json");    // Set the request headers
       String jsonPayload = json.toString();
@@ -240,9 +227,6 @@ class Contest2023_api{
       postReq.send();                    // Send the request and receive the response
       response = postReq.getContent();   // Get the response body
       println("Response: " + response);  // Print the response
-    }
-    
-    actionsArray = new JSONArray();    // Clear the actionsArray 
   }
 
 }

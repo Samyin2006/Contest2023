@@ -16,7 +16,6 @@ void settings()
     delay(100);
   BoxSize = (displayHeight) / (contest_api.map_height+2);
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
-  //myBoard = new Board(this, 11, 11, BoxSize);
   //size(myBoard.width(), myBoard.height());
   fullScreen();
 }
@@ -90,10 +89,24 @@ void check_turnUpdate(){
     if(myPanel.my_turn == true){
       manson_keyIn = 0;
       myPanel.clear_action_label(contest_api.mason_num);
-      contest_api.clearActionsArray();
+      clearAllActions();
     }
     last_turn = current_turn;
     myBoard.gridUpdated = true;
+  }
+}
+
+void clearAllActions(){
+  for(int i=0; i<contest_api.mason_num; i++){
+    actionPlan[i].Action = 0;
+    actionPlan[i].Direction = 0;
+  }
+}
+
+void clearMansonActions(int _mansonID){
+  if( _mansonID+1 < contest_api.mason_num){
+    actionPlan[_mansonID-1].Action = 0;
+    actionPlan[_mansonID-1].Direction = 0;
   }
 }
 
@@ -107,7 +120,7 @@ void keyReleased(){
   if(key == ' '){
     manson_keyIn = 0;
     myPanel.clear_action_label(contest_api.mason_num);
-    contest_api.clearActionsArray();
+    clearAllActions();
     return;
   }
  
@@ -171,7 +184,6 @@ void keyReleased(){
       actionPlan[manson_keyIn].Direction = 0;
     }
     myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
-    contest_api.appendActionsArray(actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
     manson_keyIn++;
   }
 }
