@@ -15,7 +15,16 @@ void settings()
   while( !contest_api.get_initMatchesRequest() )
     delay(100);
   
-  BoxSize = (displayHeight) / (contest_api.map_height+2);
+
+  if(BoxSize * contest_api.map_height > 700){
+    BoxSize = 700 / (contest_api.map_height+2);
+  }
+  else{
+    BoxSize = (displayHeight) / (contest_api.map_height+2);
+  }
+  
+  
+  
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
   //size(myBoard.width(), myBoard.height());
   fullScreen();
