@@ -16,8 +16,8 @@ void settings()
     delay(100);
   
 
-  if(BoxSize * contest_api.map_height > 700){
-    BoxSize = 700 / (contest_api.map_height+2);
+  if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
+    BoxSize = 900 / (contest_api.map_height+2);
   }
   else{
     BoxSize = (displayHeight) / (contest_api.map_height+2);
