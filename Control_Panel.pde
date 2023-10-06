@@ -5,6 +5,8 @@ class ControlPanel{
   controlP5.Label postbutton;
   Textlabel trunSecond_label;
   Textlabel turns_label;
+  Textlabel castle_bonus, wall_bonus, territory_bonus, is_first, mason_num, map_width, map_height;
+  Textlabel match_id, opponent_name ;
   Textlabel[] action_label = new Textlabel[6];
   Textlabel[] mansonPos_label = new Textlabel[6];
   
@@ -34,29 +36,96 @@ class ControlPanel{
     
     turns_label = controlPanel_CP5.addTextlabel("turns_label")
                                   .setText("00 / 00")
-                                  .setPosition((board_width+2)*BoxSize, BoxSize*1)
+                                  .setPosition(displayWidth-800, 100)
                                   .setColorValue(0xffffffff)
                                   .setFont(createFont("Arial",40))
                                   ;
     
     trunSecond_label = controlPanel_CP5.addTextlabel("turnsSecond_label")
                                   .setText("0.0 sec / 0.0 sec")
-                                  .setPosition((board_width+2)*BoxSize, BoxSize*3)
+                                  .setPosition(displayWidth-400, 100)
                                   .setColorValue(0xffffffff)
                                   .setFont(createFont("Arial",30))
                                   ;
+
+    match_id = controlPanel_CP5.addTextlabel("match_id")
+                              .setText("ID: " + contest_api.match_id)
+                              .setPosition(displayWidth-800 , 200)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    opponent_name = controlPanel_CP5.addTextlabel("opponent_name")
+                              .setText("Opponent: " + contest_api.opponent_name)
+                              .setPosition(displayWidth-600 , 200)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    map_width = controlPanel_CP5.addTextlabel("map_width")
+                              .setText("Rows: " + contest_api.map_width)
+                              .setPosition(displayWidth-800 , 300)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    map_height = controlPanel_CP5.addTextlabel("map_height")
+                              .setText("Columns: " + contest_api.map_height)
+                              .setPosition(displayWidth-400 , 300)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    is_first = controlPanel_CP5.addTextlabel("is_first")
+                              .setText("isFirst: " + contest_api.match_isFirst)
+                              .setPosition(displayWidth-800 , 400)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    mason_num = controlPanel_CP5.addTextlabel("mason_num")
+                              .setText("Masons: " + contest_api.mason_num)
+                              .setPosition(displayWidth-400 , 400)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    castle_bonus = controlPanel_CP5.addTextlabel("castle_bonus")
+                              .setText("Castle: " + contest_api.castleBonus)
+                              .setPosition(displayWidth-800 , 500)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+    territory_bonus = controlPanel_CP5.addTextlabel("territory_bonus")
+                              .setText("Territory: " + contest_api.territoryBonus)
+                              .setPosition(displayWidth-550 , 500)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+
+    wall_bonus = controlPanel_CP5.addTextlabel("wall_bonus")
+                              .setText("Wall: " + contest_api.wallBonus)
+                              .setPosition(displayWidth-300 , 500)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",30))
+                              ;
+
+
+    
     
     for(int i=0; i<6 ;i++){
       action_label[i] = controlPanel_CP5.addTextlabel("action_label" + str(i))
                                     .setText("")
-                                    .setPosition((board_width+2)*BoxSize + 150, BoxSize*(5+i))
+                                    .setPosition(displayWidth-650, (600+i*100))
                                     .setColorValue(0xffffffff)
                                     .setFont(createFont("Arial",30))
                                     ;
       
       mansonPos_label[i] = controlPanel_CP5.addTextlabel("mansonPos_label" + str(i))
                                     .setText("")
-                                    .setPosition((board_width+2)*BoxSize, BoxSize*(5+i))
+                                    .setPosition(displayWidth-800, (600+i*100))
                                     .setColorValue(0xffffffff)
                                     .setFont(createFont("Arial",30))
                                     ;
@@ -66,7 +135,7 @@ class ControlPanel{
     postbutton = controlPanel_CP5.addButton( "POST" ) //Create button with ID
                              .plugTo(this, "post_btn_click")                      //Link this button event to "btn_click" function
                              .setLock(false)
-                             .setPosition((board_width+2)*BoxSize, (board_height)*BoxSize)              //Button position
+                             .setPosition(displayWidth-800, displayHeight-200)              //Button position
                              .setSize(button_width, button_height)           //Button size
                              .setFont(font)                                  //Set font type and size
                              .getCaptionLabel()

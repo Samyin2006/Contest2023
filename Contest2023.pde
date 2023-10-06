@@ -15,8 +15,10 @@ void settings()
   while( !contest_api.get_initMatchesRequest() )
     delay(100);
   
-
-  if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
+  if(contest_api.map_height == contest_api.map_width){
+    BoxSize = (displayHeight) / (contest_api.map_height+2);
+  }
+  else if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
     BoxSize = 900 / (contest_api.map_height+2);
   }
   else{
