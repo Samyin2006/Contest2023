@@ -34,109 +34,109 @@ class ControlPanel{
     font = createFont("Arial",24);
     
     
+    
     turns_label = controlPanel_CP5.addTextlabel("turns_label")
                                   .setText("00 / 00")
-                                  .setPosition(displayWidth-800, 100)
+                                  .setPosition(displayWidth-300, 20)
                                   .setColorValue(0xffffffff)
-                                  .setFont(createFont("Arial",40))
+                                  .setFont(createFont("Arial",70))
                                   ;
     
     trunSecond_label = controlPanel_CP5.addTextlabel("turnsSecond_label")
                                   .setText("0.0 sec / 0.0 sec")
-                                  .setPosition(displayWidth-400, 100)
+                                  .setPosition(displayWidth-300, 100)
                                   .setColorValue(0xffffffff)
                                   .setFont(createFont("Arial",30))
                                   ;
 
     match_id = controlPanel_CP5.addTextlabel("match_id")
                               .setText("ID: " + contest_api.match_id)
-                              .setPosition(displayWidth-800 , 200)
+                              .setPosition(displayWidth-300 , 150)
                               .setColorValue(0xffffffff)
                               .setFont(createFont("Arial",30))
                               ;
 
-    opponent_name = controlPanel_CP5.addTextlabel("opponent_name")
-                              .setText("Opponent: " + contest_api.opponent_name)
-                              .setPosition(displayWidth-600 , 200)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
+    //opponent_name = controlPanel_CP5.addTextlabel("opponent_name")
+    //                          .setText("Opponent: " + contest_api.opponent_name)
+    //                          .setPosition(displayWidth-300 , 200)
+    //                          .setColorValue(0xffffffff)
+    //                          .setFont(createFont("Arial",30))
+    //                          ;
 
-    map_width = controlPanel_CP5.addTextlabel("map_width")
-                              .setText("Rows: " + contest_api.map_width)
-                              .setPosition(displayWidth-800 , 300)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
+    //map_width = controlPanel_CP5.addTextlabel("map_width")
+    //                          .setText("Rows: " + contest_api.map_width)
+    //                          .setPosition(displayWidth-800 , 300)
+    //                          .setColorValue(0xffffffff)
+    //                          .setFont(createFont("Arial",30))
+    //                          ;
 
-    map_height = controlPanel_CP5.addTextlabel("map_height")
-                              .setText("Columns: " + contest_api.map_height)
-                              .setPosition(displayWidth-400 , 300)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
+    //map_height = controlPanel_CP5.addTextlabel("map_height")
+    //                          .setText("Columns: " + contest_api.map_height)
+    //                          .setPosition(displayWidth-400 , 300)
+    //                          .setColorValue(0xffffffff)
+    //                          .setFont(createFont("Arial",30))
+    //                          ;
 
-    is_first = controlPanel_CP5.addTextlabel("is_first")
-                              .setText("isFirst: " + contest_api.match_isFirst)
-                              .setPosition(displayWidth-800 , 400)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
+    //is_first = controlPanel_CP5.addTextlabel("is_first")
+    //                          .setText("isFirst: " + contest_api.match_isFirst)
+    //                          .setPosition(displayWidth-800 , 400)
+    //                          .setColorValue(0xffffffff)
+    //                          .setFont(createFont("Arial",30))
+    //                          ;
 
-    mason_num = controlPanel_CP5.addTextlabel("mason_num")
-                              .setText("Masons: " + contest_api.mason_num)
-                              .setPosition(displayWidth-400 , 400)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
+    //mason_num = controlPanel_CP5.addTextlabel("mason_num")
+    //                          .setText("Masons: " + contest_api.mason_num)
+    //                          .setPosition(displayWidth-400 , 400)
+    //                          .setColorValue(0xffffffff)
+    //                          .setFont(createFont("Arial",30))
+    //                          ;
 
-    castle_bonus = controlPanel_CP5.addTextlabel("castle_bonus")
-                              .setText("Castle: " + contest_api.castleBonus)
-                              .setPosition(displayWidth-800 , 500)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
-
-    territory_bonus = controlPanel_CP5.addTextlabel("territory_bonus")
-                              .setText("Territory: " + contest_api.territoryBonus)
-                              .setPosition(displayWidth-550 , 500)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
-
-
-    wall_bonus = controlPanel_CP5.addTextlabel("wall_bonus")
-                              .setText("Wall: " + contest_api.wallBonus)
-                              .setPosition(displayWidth-300 , 500)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
-                              ;
-
-
-    
-    
     for(int i=0; i<6 ;i++){
       action_label[i] = controlPanel_CP5.addTextlabel("action_label" + str(i))
                                     .setText("")
-                                    .setPosition(displayWidth-650, (600+i*100))
+                                    .setPosition(displayWidth-300, (250+i*50))
                                     .setColorValue(0xffffffff)
                                     .setFont(createFont("Arial",30))
                                     ;
       
       mansonPos_label[i] = controlPanel_CP5.addTextlabel("mansonPos_label" + str(i))
                                     .setText("")
-                                    .setPosition(displayWidth-800, (600+i*100))
+                                    .setPosition(displayWidth-400, (250+i*50))
                                     .setColorValue(0xffffffff)
                                     .setFont(createFont("Arial",30))
+                                    .setVisible(false);
                                     ;
       
     }
     
+    castle_bonus = controlPanel_CP5.addTextlabel("castle_bonus")
+                              .setText("Castle: " + contest_api.castleBonus)
+                              .setPosition(displayWidth-300 , displayHeight-160)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",20))
+                              ;
+
+    territory_bonus = controlPanel_CP5.addTextlabel("territory_bonus")
+                              .setText("Territory: " + contest_api.territoryBonus)
+                              .setPosition(displayWidth-300 , displayHeight-140)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",20))
+                              ;
+
+
+    wall_bonus = controlPanel_CP5.addTextlabel("wall_bonus")
+                              .setText("Wall: " + contest_api.wallBonus)
+                              .setPosition(displayWidth-300 , displayHeight-120)
+                              .setColorValue(0xffffffff)
+                              .setFont(createFont("Arial",20))
+                              ;
+
+    
     postbutton = controlPanel_CP5.addButton( "POST" ) //Create button with ID
                              .plugTo(this, "post_btn_click")                      //Link this button event to "btn_click" function
                              .setLock(false)
-                             .setPosition(displayWidth-800, displayHeight-200)              //Button position
-                             .setSize(button_width, button_height)           //Button size
+                             .setPosition(displayWidth-300, displayHeight-80)              //Button position
+                             .setSize(250, 50)           //Button size
                              .setFont(font)                                  //Set font type and size
                              .getCaptionLabel()
                              .align(ControlP5.CENTER, ControlP5.CENTER)
@@ -182,11 +182,13 @@ class ControlPanel{
     if(_currentTurn < 0){
       if(_isFirst){
         turns_label.setColor(color(255, 0, 0));
-        turns_label.setText( "First Hand" );
+        turns_label.setFont(createFont("Arial",30));
+        turns_label.setText( "First Hand\n    READY" );
       }
       else{
         turns_label.setColor(color(0, 255, 0));
-        turns_label.setText( "Second Hand" );
+        turns_label.setFont(createFont("Arial",30));
+        turns_label.setText( "Second Hand\n    READY" );
       }
     }
     else{
@@ -194,10 +196,12 @@ class ControlPanel{
       if(_isFirst){
         if(_currentTurn%2 == 0){
           turns_label.setColor(color(255, 0, 0));
+          turns_label.setFont(createFont("Arial",70));
           my_turn = true;
         }
         else{
           turns_label.setColor(color(0, 255, 0));
+          turns_label.setFont(createFont("Arial",70));
           my_turn = false;
         }
       }
@@ -205,10 +209,12 @@ class ControlPanel{
       {
         if(_currentTurn%2 == 0){
           turns_label.setColor(color(0, 255, 0));
+          turns_label.setFont(createFont("Arial",70));
           my_turn = false;
         }
         else{
           turns_label.setColor(color(255, 0, 0));
+          turns_label.setFont(createFont("Arial",70));
           my_turn = true;
         }
       }
@@ -223,7 +229,7 @@ class ControlPanel{
     remainMillisSec = _turn_time * 1000 - timer.millis() - timer.second()*1000;
     
     if(_TooEarly){
-      trunSecond_label.setText( "READY\nTurn time = " + str(_turn_time) + "s");
+      trunSecond_label.setText( "Turn time = " + str(_turn_time) + "s");
     }
     else
       trunSecond_label.setText( str( currentSecond ) + " sec / " + str(_turn_time) + " sec");

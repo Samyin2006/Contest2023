@@ -31,7 +31,7 @@ void settings()
   //size(myBoard.width(), myBoard.height());
   fullScreen();
   
-  
+  println("screen size = " + displayWidth + " x " + displayHeight );
 }
   
 void setup()
