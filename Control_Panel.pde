@@ -5,7 +5,7 @@ class ControlPanel{
   controlP5.Label postbutton;
   Textlabel trunSecond_label;
   Textlabel turns_label;
-  Textlabel castle_bonus, wall_bonus, territory_bonus, is_first, mason_num, map_width, map_height;
+  Textlabel bonus, allies_count, opponent_count;
   Textlabel match_id, opponent_name ;
   Textlabel[] action_label = new Textlabel[6];
   Textlabel[] mansonPos_label = new Textlabel[6];
@@ -56,41 +56,6 @@ class ControlPanel{
                               .setFont(createFont("Arial",30))
                               ;
 
-    //opponent_name = controlPanel_CP5.addTextlabel("opponent_name")
-    //                          .setText("Opponent: " + contest_api.opponent_name)
-    //                          .setPosition(displayWidth-300 , 200)
-    //                          .setColorValue(0xffffffff)
-    //                          .setFont(createFont("Arial",30))
-    //                          ;
-
-    //map_width = controlPanel_CP5.addTextlabel("map_width")
-    //                          .setText("Rows: " + contest_api.map_width)
-    //                          .setPosition(displayWidth-800 , 300)
-    //                          .setColorValue(0xffffffff)
-    //                          .setFont(createFont("Arial",30))
-    //                          ;
-
-    //map_height = controlPanel_CP5.addTextlabel("map_height")
-    //                          .setText("Columns: " + contest_api.map_height)
-    //                          .setPosition(displayWidth-400 , 300)
-    //                          .setColorValue(0xffffffff)
-    //                          .setFont(createFont("Arial",30))
-    //                          ;
-
-    //is_first = controlPanel_CP5.addTextlabel("is_first")
-    //                          .setText("isFirst: " + contest_api.match_isFirst)
-    //                          .setPosition(displayWidth-800 , 400)
-    //                          .setColorValue(0xffffffff)
-    //                          .setFont(createFont("Arial",30))
-    //                          ;
-
-    //mason_num = controlPanel_CP5.addTextlabel("mason_num")
-    //                          .setText("Masons: " + contest_api.mason_num)
-    //                          .setPosition(displayWidth-400 , 400)
-    //                          .setColorValue(0xffffffff)
-    //                          .setFont(createFont("Arial",30))
-    //                          ;
-
     for(int i=0; i<6 ;i++){
       action_label[i] = controlPanel_CP5.addTextlabel("action_label" + str(i))
                                     .setText("")
@@ -109,27 +74,33 @@ class ControlPanel{
       
     }
     
-    castle_bonus = controlPanel_CP5.addTextlabel("castle_bonus")
-                              .setText("Castle: " + contest_api.castleBonus)
-                              .setPosition(displayWidth-300 , displayHeight-160)
+    opponent_count = controlPanel_CP5.addTextlabel("opponent_count")
+                              .setText("" + str(contest_api.wall_count(Wall_Type.GREEN_WALL)) + "\n"
+                                          + str(contest_api.Territories_count(Territories_Type.GREEN_TERRITORIES)) + "\n"
+                                          + str(contest_api.castle_count(Territories_Type.GREEN_TERRITORIES)) )
+                              .setPosition(displayWidth-50 , displayHeight-200)
+                              .setColorValue(color(0, 255, 0))
+                              .setFont(createFont("Courier New",20))
+                              ;
+                              
+    allies_count = controlPanel_CP5.addTextlabel("allies_count")
+                              .setText("" + str(contest_api.wall_count(Wall_Type.RED_WALL)) + "\n"
+                                          + str(contest_api.Territories_count(Territories_Type.RED_TERRITORIES)) + "\n"
+                                          + str(contest_api.castle_count(Territories_Type.RED_TERRITORIES)) )
+                              .setPosition(displayWidth-100 , displayHeight-200)
+                              .setColorValue(color(255, 0, 0))
+                              .setFont(createFont("Courier New",20))
+                              ;
+    
+    bonus = controlPanel_CP5.addTextlabel("bonus")
+                              .setText(   "Wall:      " + contest_api.wallBonus + "\n"
+                                        + "Territory: " + contest_api.territoryBonus +"\n"
+                                        + "Castle:    " + contest_api.castleBonus) 
+                              .setPosition(displayWidth-300 , displayHeight-200)
                               .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",20))
+                              .setFont(createFont("Courier New",20))
                               ;
 
-    territory_bonus = controlPanel_CP5.addTextlabel("territory_bonus")
-                              .setText("Territory: " + contest_api.territoryBonus)
-                              .setPosition(displayWidth-300 , displayHeight-140)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",20))
-                              ;
-
-
-    wall_bonus = controlPanel_CP5.addTextlabel("wall_bonus")
-                              .setText("Wall: " + contest_api.wallBonus)
-                              .setPosition(displayWidth-300 , displayHeight-120)
-                              .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",20))
-                              ;
 
     
     postbutton = controlPanel_CP5.addButton( "POST" ) //Create button with ID
@@ -157,10 +128,6 @@ class ControlPanel{
     mansonPos_label[mansionIndex].setText( "[" + str(_x) + "," + str(_y) + "]");
   }
   
-  //void set_action_label(int mansionIndex, int action, int direction){
-  //  action_label[mansionIndex].setText( str(mansionIndex) + ": " + str(action) + " , " + str(direction) );
-  //}
-  
   void clear_action_label(int manson_num){
     for(int i=0; i<manson_num; i++){
       action_label[i].setText(str(i+1) + ":");
@@ -173,7 +140,15 @@ class ControlPanel{
     }
   }
   
-  
+  void bouns_Count(){
+    opponent_count.setText("" + str(contest_api.wall_count(Wall_Type.GREEN_WALL)) + "\n"
+                              + str(contest_api.Territories_count(Territories_Type.GREEN_TERRITORIES)) + "\n"
+                              + str(contest_api.castle_count(Territories_Type.GREEN_TERRITORIES)) );
+    
+    allies_count.setText("" + str(contest_api.wall_count(Wall_Type.RED_WALL)) + "\n"
+                            + str(contest_api.Territories_count(Territories_Type.RED_TERRITORIES)) + "\n"
+                            + str(contest_api.castle_count(Territories_Type.RED_TERRITORIES)) );
+  }
   
   
   

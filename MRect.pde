@@ -1,5 +1,5 @@
 enum MRect_Type {
-  FREESPACE, POND, CASTLE, RED_MANSON, GREEN_MANSON, RED_WALL, GREEN_WALL, NULL
+  FREESPACE, POND, CASTLE, RED_MANSON, GREEN_MANSON, RED_WALL, GREEN_WALL, RED_TERRITORIES, GREEN_TERRITORIES, NULL;
 }
 
 import controlP5.*;
@@ -59,6 +59,7 @@ class MRect {
     MRect_Color[5] = new CColor(color(204,0,0), color(128, 0, 0), color(80, 0, 0), color(255), color(0,255,0));         //Red wall
     MRect_Color[6] = new CColor(color(51, 204, 51), color(0, 153, 51), color(0, 102, 0), color(255), color(255));       //Green Wall
     
+    
     switch(rect_type){
       case POND:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[1]);
@@ -77,9 +78,13 @@ class MRect {
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[4]);
         break;
       case RED_WALL:
+        font = createFont("Courier New",8);
+        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[5]);
         break;
       case GREEN_WALL:
+        font = createFont("Courier New",8);
+        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[6]);
         break;
       case FREESPACE:

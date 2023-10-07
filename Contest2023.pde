@@ -15,15 +15,26 @@ void settings()
   while( !contest_api.get_initMatchesRequest() )
     delay(100);
   
-  if(contest_api.map_height == contest_api.map_width){
+  //Box size base on map longer side.  
+  if(contest_api.map_height >= contest_api.map_width){
     BoxSize = (displayHeight) / (contest_api.map_height+2);
-  }
-  else if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
-    BoxSize = 900 / (contest_api.map_height+2);
   }
   else{
-    BoxSize = (displayHeight) / (contest_api.map_height+2);
+    BoxSize = (displayWidth - 300) / (contest_api.map_width+2);
   }
+  
+  
+  
+  
+  //if(contest_api.map_height == contest_api.map_width){
+  //  BoxSize = (displayHeight) / (contest_api.map_height+2);
+  //}
+  //else if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
+  //  BoxSize = 900 / (contest_api.map_height+2);
+  //}
+  //else{
+  //  BoxSize = (displayHeight) / (contest_api.map_height+2);
+  //}
   
   
   
@@ -108,6 +119,7 @@ void check_turnUpdate(){
       myPanel.clear_action_label(contest_api.mason_num);
       clearAllActions();
     }
+    myPanel.bouns_Count();
     last_turn = current_turn;
     myBoard.gridUpdated = true;                    // Update grid display
   }

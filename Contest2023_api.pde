@@ -1,14 +1,18 @@
 import http.requests.*;
 
 enum Wall_Type { 
-  NO_WALL,
-  RED_WALL, 
-  GREEN_WALL;
+  NO_WALL,RED_WALL, GREEN_WALL;
+}
+
+enum Territories_Type {
+  FREESPACE, RED_TERRITORIES, GREEN_TERRITORIES;
 }
 
 enum Structure_Type {
   FREESPACE, POND, CASTLE;
 }
+
+
 
 class Contest2023_api{
   
@@ -36,10 +40,11 @@ class Contest2023_api{
   private GetRequest getReq;
   private PostRequest postReq;
   
-  Structure_Type[][] StructuresArray = new Structure_Type[25][25];  //Collect the Struction information from server
-  Wall_Type[][] WallArray = new Wall_Type[25][25];                  //Collect the Wall information from server
-  Manson[][] MansonArray = new Manson[25][25];                      //Collect the Manson information from server
-  MansonPosition[] MansonPos = new MansonPosition[6];               //Record all manson position
+  Structure_Type[][] StructuresArray = new Structure_Type[25][25];      //Collect the Struction information from server
+  Wall_Type[][] WallArray = new Wall_Type[25][25];                      //Collect the Wall information from server
+  Manson[][] MansonArray = new Manson[25][25];                          //Collect the Manson information from server
+  MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
+  Territories_Type[][] TerritoriesArray = new Territories_Type[25][25]; //Collect the Territories information from server
   
   Contest2023_api(){
     connection = false; 
@@ -153,7 +158,7 @@ class Contest2023_api{
       if(!(getReq.getContent().equals("TooEarly")) )
       {
         tooEarly = false;
-        //println("response: " + getReq.getContent());
+        println("response: " + getReq.getContent());
         // Parse the JSON data
         JSONObject response = parseJSONObject(getReq.getContent());
         
@@ -200,6 +205,28 @@ class Contest2023_api{
           }
         }
         
+        JSONArray territories = board.getJSONArray("territories");
+        for (int i = 0; i < map_height; i++) {
+          JSONArray rowArray = territories.getJSONArray(i);
+          for (int j = 0; j < map_width; j++) {
+            switch(rowArray.getInt(j)){
+              default:
+              case 0:
+                TerritoriesArray[j][i] = Territories_Type.FREESPACE;
+                break;
+              case 1:
+                TerritoriesArray[j][i] = Territories_Type.RED_TERRITORIES;
+                break;
+              case 2:
+                TerritoriesArray[j][i] = Territories_Type.GREEN_TERRITORIES;
+                break;
+            }
+          }
+        }
+        
+        
+        
+        
         JSONArray manson = board.getJSONArray("masons");
         for (int i = 0; i < map_height; i++) {
           JSONArray rowArray = manson.getJSONArray(i);
@@ -239,6 +266,39 @@ class Contest2023_api{
       postReq.send();                    // Send the request and receive the response
       response = postReq.getContent();   // Get the response body
       println("Response: " + response);  // Print the response
+  }
+  
+  int wall_count(Wall_Type _type){
+    int count = 0;
+    for (int i = 0; i < map_height; i++) {
+      for (int j = 0; j < map_width; j++) {
+        if( WallArray[j][i] == _type)
+          count++;
+      }
+    }
+    return count;
+  }
+  
+  int castle_count(Territories_Type _type){
+    int count = 0;
+    for (int i = 0; i < map_height; i++) {
+      for (int j = 0; j < map_width; j++) {
+        if( TerritoriesArray[j][i] == _type && StructuresArray[j][i] == Structure_Type.CASTLE)
+          count++;
+      }
+    }
+    return count;
+  }
+  
+  int Territories_count(Territories_Type _type){
+    int count = 0;
+    for (int i = 0; i < map_height; i++) {
+      for (int j = 0; j < map_width; j++) {
+        if( TerritoriesArray[j][i] == _type && StructuresArray[j][i] != Structure_Type.CASTLE)
+          count++;
+      }
+    }
+    return count;
   }
 
 }
