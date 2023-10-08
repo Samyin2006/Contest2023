@@ -23,21 +23,6 @@ void settings()
     BoxSize = (displayWidth - 300) / (contest_api.map_width+2);
   }
   
-  
-  
-  
-  //if(contest_api.map_height == contest_api.map_width){
-  //  BoxSize = (displayHeight) / (contest_api.map_height+2);
-  //}
-  //else if((displayHeight) / (contest_api.map_height+2) * contest_api.map_width> 900){
-  //  BoxSize = 900 / (contest_api.map_height+2);
-  //}
-  //else{
-  //  BoxSize = (displayHeight) / (contest_api.map_height+2);
-  //}
-  
-  
-  
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
   //size(myBoard.width(), myBoard.height());
   fullScreen();
