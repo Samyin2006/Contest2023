@@ -77,10 +77,18 @@ void check_turnUpdate(){
   if(current_turn != last_turn)
   {
     println("======================> current_turn = " + str(current_turn));
+    
+    //Layer 1 Display structure on board
     for(int i=0; i<contest_api.map_width; i++){
       for(int j=0; j<contest_api.map_height; j++){
-          if(contest_api.StructuresArray[i][j] == Structure_Type.FREESPACE)
-            myBoard.gridType[i][j] = MRect_Type.FREESPACE;
+          if(contest_api.StructuresArray[i][j] == Structure_Type.FREESPACE){
+            if(contest_api.TerritoriesArray[i][j] == Territories_Type.RED_TERRITORIES )
+              myBoard.gridType[i][j] = MRect_Type.RED_TERRITORIES;
+            else if(contest_api.TerritoriesArray[i][j] == Territories_Type.GREEN_TERRITORIES )
+              myBoard.gridType[i][j] = MRect_Type.GREEN_TERRITORIES;
+            else
+              myBoard.gridType[i][j] = MRect_Type.FREESPACE;
+          }
           else if(contest_api.StructuresArray[i][j] == Structure_Type.POND)
             myBoard.gridType[i][j] = MRect_Type.POND;
           else if(contest_api.StructuresArray[i][j] == Structure_Type.CASTLE)
@@ -88,15 +96,21 @@ void check_turnUpdate(){
         }
     }
     
+    //Layer 2 Display Wall on board (Cover POND / FREESPACE)
     for(int i=0; i<contest_api.map_width; i++){
       for(int j=0; j<contest_api.map_height; j++){
-          if(contest_api.WallArray[i][j] == Wall_Type.RED_WALL)
-            myBoard.gridType[i][j] = MRect_Type.RED_WALL;
+          if(contest_api.WallArray[i][j] == Wall_Type.RED_WALL){
+            if(contest_api.StructuresArray[i][j] == Structure_Type.POND)
+              myBoard.gridType[i][j] = MRect_Type.RED_WALL_POND;
+            else
+              myBoard.gridType[i][j] = MRect_Type.RED_WALL;
+          }
           else if(contest_api.WallArray[i][j] == Wall_Type.GREEN_WALL)
             myBoard.gridType[i][j] = MRect_Type.GREEN_WALL;
         }
     }
     
+    //Layer 3 Display Manson on board (Cover Wall, Freespace, Walls)
     for(int i=0; i<contest_api.map_width; i++){
       for(int j=0; j<contest_api.map_height; j++){
         if(contest_api.MansonArray[i][j].manson_ID > 0){
