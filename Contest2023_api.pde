@@ -43,8 +43,8 @@ class Contest2023_api{
   Structure_Type[][] StructuresArray = new Structure_Type[25][25];      //Collect the Struction information from server
   Wall_Type[][] WallArray = new Wall_Type[25][25];                      //Collect the Wall information from server
   Manson[][] MansonArray = new Manson[25][25];                          //Collect the Manson information from server
-  MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
   Territories_Type[][] TerritoriesArray = new Territories_Type[25][25]; //Collect the Territories information from server
+  MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
   
   Contest2023_api(){
     connection = false; 
@@ -69,7 +69,7 @@ class Contest2023_api{
     
     if(getinitReq.getContent() != null){
       connection = true;
-      println("response: " + getinitReq.getContent());
+      //println("response: " + getinitReq.getContent());
       JSONObject response = parseJSONObject(getinitReq.getContent());
       JSONArray matches = response.getJSONArray("matches");
       JSONObject match = matches.getJSONObject(0);
@@ -158,7 +158,7 @@ class Contest2023_api{
       if(!(getReq.getContent().equals("TooEarly")) )
       {
         tooEarly = false;
-        println("response: " + getReq.getContent());
+        //println("response: " + getReq.getContent());
         // Parse the JSON data
         JSONObject response = parseJSONObject(getReq.getContent());
         

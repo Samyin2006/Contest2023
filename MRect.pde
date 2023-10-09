@@ -133,7 +133,6 @@ class MRect {
     
     if (mouseButton == RIGHT)
     {
-      
       println(" -----btn_click: " + str(index_x) + "," + str(index_y) + " <Right-click>");
     }
     else
