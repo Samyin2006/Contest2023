@@ -61,14 +61,14 @@ class ControlPanel{
                                     .setText("")
                                     .setPosition(displayWidth-300, (250+i*50))
                                     .setColorValue(0xffffffff)
-                                    .setFont(createFont("Arial",30))
+                                    .setFont(createFont("Arial",20))
                                     ;
       
       mansonPos_label[i] = controlPanel_CP5.addTextlabel("mansonPos_label" + str(i))
                                     .setText("")
                                     .setPosition(displayWidth-400, (250+i*50))
                                     .setColorValue(0xffffffff)
-                                    .setFont(createFont("Arial",30))
+                                    .setFont(createFont("Arial",20))
                                     .setVisible(false);
                                     ;
       
