@@ -44,7 +44,8 @@ class Contest2023_api{
   Wall_Type[][] WallArray = new Wall_Type[25][25];                      //Collect the Wall information from server
   Manson[][] MansonArray = new Manson[25][25];                          //Collect the Manson information from server
   Territories_Type[][] TerritoriesArray = new Territories_Type[25][25]; //Collect the Territories information from server
-  MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
+  MansonPlan[] actionPlan = new MansonPlan[6];
+  //MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
   
   Contest2023_api(){
     connection = false; 
@@ -58,7 +59,7 @@ class Contest2023_api{
     }
     
     for(int k=0; k<6; k++)
-      MansonPos[k] = new MansonPosition();
+      actionPlan[k] = new MansonPlan();
     
   }
   
@@ -123,7 +124,7 @@ class Contest2023_api{
               MansonArray[j][i].manson_ID = rowArray.getInt(j)*(-1);
               
             if(MansonArray[j][i].manson_ID > 0)
-              MansonPos[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
+              actionPlan[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
           }
         }
       
@@ -233,7 +234,7 @@ class Contest2023_api{
           for (int j = 0; j < map_width; j++) {
               MansonArray[j][i].manson_ID = rowArray.getInt(j);
               if(MansonArray[j][i].manson_ID > 0)
-                MansonPos[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
+                actionPlan[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);
           }
         }
       }

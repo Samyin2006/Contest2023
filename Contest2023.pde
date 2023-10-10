@@ -6,7 +6,7 @@ Contest2023_api contest_api;
 int current_turn;
 int last_turn;
 int manson_keyIn;
-MansonPlan[] actionPlan = new MansonPlan[6];
+
 
 
 void settings()
@@ -34,9 +34,7 @@ void setup()
 {
   myBoard.init_board();
   myPanel = new ControlPanel(this, contest_api.map_width, contest_api.map_height, BoxSize);
-  for(int i=0; i<contest_api.mason_num; i++){
-    actionPlan[i] = new MansonPlan();
-  }
+  
   myPanel.clear_action_label(contest_api.mason_num);
   last_turn = -2;
   manson_keyIn = 0;
@@ -111,7 +109,7 @@ void check_turnUpdate(){
     
     myPanel.reset_trunSecond_label();            // Reset Timer 
     for(int i=0; i<contest_api.mason_num; i++)   // Display Manson location
-      myPanel.set_manson_pos_label(i, contest_api.MansonPos[i].xPos, contest_api.MansonPos[i].yPos);    
+      myPanel.set_manson_pos_label(i, contest_api.actionPlan[i].current_x, contest_api.actionPlan[i].current_y);    
     
     if(myPanel.my_turn == true)                  // Clear Manson Action Plan
       clearAllActions();
@@ -125,14 +123,14 @@ void clearAllActions(){
   manson_keyIn = 0;
   myPanel.clear_action_label(contest_api.mason_num);
   for(int i=0; i<contest_api.mason_num; i++){
-    actionPlan[i].Action = 0;
-    actionPlan[i].Direction = 0;
+    contest_api.actionPlan[i].Action = 0;
+    contest_api.actionPlan[i].Direction = 0;
   }
 }
 
 void clearMansonActions(int _mansonID){
   if( _mansonID+1 < contest_api.mason_num){
-    actionPlan[_mansonID-1].Action = 0;
-    actionPlan[_mansonID-1].Direction = 0;
+    contest_api.actionPlan[_mansonID-1].Action = 0;
+    contest_api.actionPlan[_mansonID-1].Direction = 0;
   }
 }

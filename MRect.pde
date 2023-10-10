@@ -137,6 +137,7 @@ class MRect {
     }
     else
     {
+      mouse_Record(index_x, index_y);
       println(" -----btn_click: " + str(index_x) + "," + str(index_y));
     }
      

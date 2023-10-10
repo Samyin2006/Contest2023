@@ -1,1 +1,1 @@
-procon-server_win.exe -c 11x11.json
+procon-server_win.exe -c 25x25.json

@@ -12,7 +12,8 @@ void keyReleased(){
     
   if (key == ENTER || key == RETURN) {
     println("Path searching");
-    aStar(myBoard, myBoard.r[contest_api.MansonPos[0].xPos][contest_api.MansonPos[0].yPos], myBoard.r[contest_api.map_width-1][contest_api.map_height-1]);
+    for(int i=0; i< contest_api.mason_num ; i++)
+      aStar(myBoard, contest_api.actionPlan[i]);
     return;
   }
   
@@ -64,62 +65,62 @@ void keyReleased(){
   
   //////////////////////////////////Build/Destory//////////////////////////////////////////
   if(manson_keyIn < contest_api.mason_num){
-    int pos_x = contest_api.MansonPos[manson_keyIn].xPos;
-    int pos_y = contest_api.MansonPos[manson_keyIn].yPos;
+    int pos_x = contest_api.actionPlan[manson_keyIn].current_x;
+    int pos_y = contest_api.actionPlan[manson_keyIn].current_y;
     
     if(keyCode == UP){
-      actionPlan[manson_keyIn].Direction = 2;
+      contest_api.actionPlan[manson_keyIn].Direction = 2;
       if(contest_api.WallArray[pos_x][pos_y-1] == Wall_Type.GREEN_WALL){
-        actionPlan[manson_keyIn].Action = 3;  
-        actionPlan[manson_keyIn].real_action = "Destroy UP";
+        contest_api.actionPlan[manson_keyIn].Action = 3;  
+        contest_api.actionPlan[manson_keyIn].real_action = "Destroy UP";
         println("Destroy Up!!!!");
       }
       else{
-        actionPlan[manson_keyIn].Action = 2;
-        actionPlan[manson_keyIn].real_action = "BUILD UP";
+        contest_api.actionPlan[manson_keyIn].Action = 2;
+        contest_api.actionPlan[manson_keyIn].real_action = "BUILD UP";
         println("Build Up!!!!");
       }
 
     }
     else if (keyCode  == DOWN){ 
       
-      actionPlan[manson_keyIn].Direction = 6;
+      contest_api.actionPlan[manson_keyIn].Direction = 6;
       if(contest_api.WallArray[pos_x][pos_y+1] == Wall_Type.GREEN_WALL){
-        actionPlan[manson_keyIn].Action = 3;  
-        actionPlan[manson_keyIn].real_action = "Destroy DOWN";
+        contest_api.actionPlan[manson_keyIn].Action = 3;  
+        contest_api.actionPlan[manson_keyIn].real_action = "Destroy DOWN";
         println("Destroy DOWN!!!!");
       }
       else{
-        actionPlan[manson_keyIn].Action = 2;
-        actionPlan[manson_keyIn].real_action = "BUILD DOWN";
+        contest_api.actionPlan[manson_keyIn].Action = 2;
+        contest_api.actionPlan[manson_keyIn].real_action = "BUILD DOWN";
         println("Build DOWN!!!!");
       }
   
     }
     else if (keyCode  == LEFT){
-      actionPlan[manson_keyIn].Direction = 8;
+      contest_api.actionPlan[manson_keyIn].Direction = 8;
       if(contest_api.WallArray[pos_x-1][pos_y] == Wall_Type.GREEN_WALL){
-        actionPlan[manson_keyIn].Action = 3;  
-        actionPlan[manson_keyIn].real_action = "Destroy LEFT";
+        contest_api.actionPlan[manson_keyIn].Action = 3;  
+        contest_api.actionPlan[manson_keyIn].real_action = "Destroy LEFT";
         println("Destroy LEFT!!!!");
       }
       else{
-        actionPlan[manson_keyIn].Action = 2;
-        actionPlan[manson_keyIn].real_action = "BUILD LEFT";
+        contest_api.actionPlan[manson_keyIn].Action = 2;
+        contest_api.actionPlan[manson_keyIn].real_action = "BUILD LEFT";
         println("Build LEFT!!!!");
       }
 
     }
     else if (keyCode  == RIGHT){
-      actionPlan[manson_keyIn].Direction = 4;
+      contest_api.actionPlan[manson_keyIn].Direction = 4;
       if(contest_api.WallArray[pos_x-1][pos_y] == Wall_Type.GREEN_WALL){
-        actionPlan[manson_keyIn].Action = 3;  
-        actionPlan[manson_keyIn].real_action = "Destroy RIGHT";
+        contest_api.actionPlan[manson_keyIn].Action = 3;  
+        contest_api.actionPlan[manson_keyIn].real_action = "Destroy RIGHT";
         println("Destroy RIGHT!!!!");
       }
       else{
-        actionPlan[manson_keyIn].Action = 2;
-        actionPlan[manson_keyIn].real_action = "BUILD RIGHT";
+        contest_api.actionPlan[manson_keyIn].Action = 2;
+        contest_api.actionPlan[manson_keyIn].real_action = "BUILD RIGHT";
         println("Build RIGHT!!!!");
       }
     }
@@ -128,52 +129,51 @@ void keyReleased(){
     
     //////////////////////////////////Move//////////////////////////////////////////
     else if (key  == '1'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 7;
-      actionPlan[manson_keyIn].real_action = "MOVE BOTTOM LEFT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 7;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE BOTTOM LEFT";
     }
     else if (key  == '2'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 6;
-      actionPlan[manson_keyIn].real_action = "MOVE DOWN";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 6;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE DOWN";
     }
     else if (key  == '3'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 5;
-      actionPlan[manson_keyIn].real_action = "MOVE BOTTOM RIGHT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 5;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE BOTTOM RIGHT";
     }
     else if (key  == '4'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 8;
-      actionPlan[manson_keyIn].real_action = "MOVE LEFT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 8;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE LEFT";
     }
     else if (key  == '6'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 4;
-      actionPlan[manson_keyIn].real_action = "MOVE RIGHT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 4;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE RIGHT";
     }
     else if (key  == '7'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 1;
-      actionPlan[manson_keyIn].real_action = "MOVE TOP LEFT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 1;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE TOP LEFT";
     }
     else if (key  == '8'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 2;
-      actionPlan[manson_keyIn].real_action = "MOVE UP";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 2;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE UP";
     }
     else if (key  == '9'){
-      actionPlan[manson_keyIn].Action = 1;
-      actionPlan[manson_keyIn].Direction = 3;
-      actionPlan[manson_keyIn].real_action = "MOVE TOP RIGHT";
+      contest_api.actionPlan[manson_keyIn].Action = 1;
+      contest_api.actionPlan[manson_keyIn].Direction = 3;
+      contest_api.actionPlan[manson_keyIn].real_action = "MOVE TOP RIGHT";
     }    
     else if (key == '0' || key == '5'){
-      actionPlan[manson_keyIn].Action = 0;
-      actionPlan[manson_keyIn].Direction = 0;
-      actionPlan[manson_keyIn].real_action = "HOLD";
+      contest_api.actionPlan[manson_keyIn].Action = 0;
+      contest_api.actionPlan[manson_keyIn].Direction = 0;
+      contest_api.actionPlan[manson_keyIn].real_action = "HOLD";
     }
-    myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].real_action);
-    //myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].Action, actionPlan[manson_keyIn].Direction);
+    myPanel.set_action_label(manson_keyIn, contest_api.actionPlan[manson_keyIn].real_action);
     manson_keyIn++;
   }
 }

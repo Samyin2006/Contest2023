@@ -18,13 +18,13 @@ class Node implements Comparable<Node> {
   }
 }
 
-void aStar(Board _maze, MRect _start, MRect _end) {
+void aStar(Board _maze, MansonPlan _manson) {
   PriorityQueue<Node> queue = new PriorityQueue<>();
-  queue.add(new Node(_start.index_x, _start.index_y, 0, null));    //Starting Point
+  queue.add(new Node(_manson.current_x, _manson.current_y, 0, null));    //Starting Point
   
   println("aStar perform (size) = " + _maze.numOfHorizontal + "x" + _maze.numOfVertical );
-  println("aStar perform (start) = " + _start.index_x + "," + _start.index_y );
-  println("aStar perform (start) = " + _end.index_x + "," + _end.index_y );
+  println("aStar perform (start) = " + _manson.current_x + "," + _manson.current_y );
+  println("aStar perform (start) = " + _manson.target_x + "," + _manson.target_y );
   
   boolean[][] visited = new boolean[_maze.numOfHorizontal][_maze.numOfVertical];
   
@@ -43,9 +43,9 @@ void aStar(Board _maze, MRect _start, MRect _end) {
 
     visited[current.x][current.y] = true;
 
-    if (current.x == _end.index_x && current.y == _end.index_y) {
+    if (current.x == _manson.target_x && current.y == _manson.target_y) {
       println("aStar end Searching...");
-      printPath(current);
+      printPath(current, _manson);
       return;
     }
 
@@ -70,7 +70,7 @@ void aStar(Board _maze, MRect _start, MRect _end) {
   }
 }
 
-void printPath(Node node) {
+void printPath(Node node, MansonPlan _manson) {
   LinkedList<Node> path = new LinkedList<Node>();
   Node current = node;
   int moveX, moveY;
@@ -89,35 +89,36 @@ void printPath(Node node) {
     println("The secondary node = " + "[" + moveX + ", " + moveY + "]");
     
      
-    actionPlan[0].Action = 1;
-    if(moveX < contest_api.MansonPos[manson_keyIn].xPos && moveY < contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 1;
-      actionPlan[0].real_action = "MOVE TOP LEFT";
-    }else if(moveX == contest_api.MansonPos[manson_keyIn].xPos && moveY < contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 2;
-      actionPlan[0].real_action = "MOVE UP";
-    }else if(moveX > contest_api.MansonPos[manson_keyIn].xPos && moveY < contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 3;
-      actionPlan[0].real_action = "MOVE TOP RIGHT";
-    }else if(moveX < contest_api.MansonPos[manson_keyIn].xPos && moveY == contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 8;
-      actionPlan[0].real_action = "MOVE LEFT";
-    }else if(moveX == contest_api.MansonPos[manson_keyIn].xPos && moveY == contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 0;
-      actionPlan[0].real_action = "HOLD";
-    }else if(moveX > contest_api.MansonPos[manson_keyIn].xPos && moveY == contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 4;
-      actionPlan[0].real_action = "MOVE RIGHT";
-    }else if(moveX < contest_api.MansonPos[manson_keyIn].xPos && moveY > contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 7;
-      actionPlan[0].real_action = "MOVE BOTTOM LEFT";
-    }else if(moveX == contest_api.MansonPos[manson_keyIn].xPos && moveY > contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 6;
-      actionPlan[0].real_action = "MOVE DOWN";
-    }else if(moveX > contest_api.MansonPos[manson_keyIn].xPos && moveY > contest_api.MansonPos[manson_keyIn].yPos){
-      actionPlan[0].Direction = 5;
-      actionPlan[0].real_action = "MOVE BOTTOM RIGHT";
+    _manson.Action = 1;
+    if(moveX < _manson.current_x && moveY < _manson.current_y){
+      _manson.Direction = 1;
+      _manson.real_action = "MOVE TOP LEFT";
+    }else if(moveX == _manson.current_x && moveY < _manson.current_y){
+      _manson.Direction = 2;
+      _manson.real_action = "MOVE UP";
+    }else if(moveX > _manson.current_x && moveY < _manson.current_y){
+      _manson.Direction = 3;
+      _manson.real_action = "MOVE TOP RIGHT";
+    }else if(moveX < _manson.current_x && moveY == _manson.current_y){
+      _manson.Direction = 8;
+      _manson.real_action = "MOVE LEFT";
+    }else if(moveX > _manson.current_x && moveY == _manson.current_y){
+      _manson.Direction = 4;
+      _manson.real_action = "MOVE RIGHT";
+    }else if(moveX < _manson.current_x && moveY > _manson.current_y){
+      _manson.Direction = 7;
+      _manson.real_action = "MOVE BOTTOM LEFT";
+    }else if(moveX == _manson.current_x && moveY > _manson.current_y){
+      _manson.Direction = 6;
+      _manson.real_action = "MOVE DOWN";
+    }else if(moveX > _manson.current_x && moveY > _manson.current_y){
+      _manson.Direction = 5;
+      _manson.real_action = "MOVE BOTTOM RIGHT";
     }
-    myPanel.set_action_label(manson_keyIn, actionPlan[manson_keyIn].real_action);
+    myPanel.set_all_action_label();
+  }else{
+    _manson.Direction = 0;
+    _manson.real_action = "ARRIVED";
+    myPanel.set_all_action_label();
   }
 }

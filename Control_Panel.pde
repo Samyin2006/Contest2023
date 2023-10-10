@@ -124,6 +124,11 @@ class ControlPanel{
     action_label[mansionIndex].setText( str(mansionIndex+1) + ": " + real_action );
   }
   
+  void set_all_action_label(){
+    for(int i=0; i<contest_api.mason_num; i++)
+      action_label[i].setText( str(i+1) + ": " + contest_api.actionPlan[i].real_action );
+  }
+  
   void set_manson_pos_label(int mansionIndex, int _x, int _y){
     mansonPos_label[mansionIndex].setText( "[" + str(_x) + "," + str(_y) + "]");
   }
