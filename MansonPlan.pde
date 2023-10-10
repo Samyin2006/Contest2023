@@ -39,6 +39,7 @@ class MansonPlan{
   }
   
   void setPlannedWall_round(int _xPos, int _yPos){
+    println("setPlannedWall_round");
     PlannedWallArray[_xPos-1][_yPos] = Wall_Type.RED_WALL;
     PlannedWallArray[_xPos+1][_yPos] = Wall_Type.RED_WALL;
     PlannedWallArray[_xPos][_yPos-1] = Wall_Type.RED_WALL;
@@ -55,7 +56,7 @@ class MansonPlan{
   
   boolean checkPlannedWall_UP(){
     if(current_y-1 > 0){
-      if(contest_api.WallArray[current_x][current_y-1] != Wall_Type.RED_WALL){
+      if(contest_api.WallArray[current_x][current_y-1] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x][current_y-1] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x][current_y-1] == Wall_Type.RED_WALL)
           return true;
       }else
@@ -66,7 +67,7 @@ class MansonPlan{
   
   boolean checkPlannedWall_DOWN(){
     if(current_y+1 < contest_api.map_height){
-      if(contest_api.WallArray[current_x][current_y+1] != Wall_Type.RED_WALL){
+      if(contest_api.WallArray[current_x][current_y+1] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x][current_y+1] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x][current_y+1] == Wall_Type.RED_WALL)
           return true;
       }else
@@ -77,7 +78,7 @@ class MansonPlan{
   
   boolean checkPlannedWall_LEFT(){
     if(current_x-1 > 0){
-      if(contest_api.WallArray[current_x-1][current_y] != Wall_Type.RED_WALL){
+      if(contest_api.WallArray[current_x-1][current_y] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x-1][current_y] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x-1][current_y] == Wall_Type.RED_WALL)
           return true;
       }else
@@ -88,7 +89,7 @@ class MansonPlan{
   
   boolean checkPlannedWall_RIGHT(){
     if(current_x+1 < contest_api.map_width){
-      if(contest_api.WallArray[current_x+1][current_y] != Wall_Type.RED_WALL){
+      if(contest_api.WallArray[current_x+1][current_y] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x+1][current_y] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x+1][current_y] == Wall_Type.RED_WALL)
           return true;
       }else

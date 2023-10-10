@@ -22,9 +22,9 @@ void aStar(Board _maze, MansonPlan _manson) {
   PriorityQueue<Node> queue = new PriorityQueue<>();
   queue.add(new Node(_manson.current_x, _manson.current_y, 0, null));    //Starting Point
   
-  println("aStar perform (size) = " + _maze.numOfHorizontal + "x" + _maze.numOfVertical );
-  println("aStar perform (start) = " + _manson.current_x + "," + _manson.current_y );
-  println("aStar perform (start) = " + _manson.target_x + "," + _manson.target_y );
+  //println("aStar perform (size) = " + _maze.numOfHorizontal + "x" + _maze.numOfVertical );
+  //println("aStar perform (start) = " + _manson.current_x + "," + _manson.current_y );
+  //println("aStar perform (start) = " + _manson.target_x + "," + _manson.target_y );
   
   boolean[][] visited = new boolean[_maze.numOfHorizontal][_maze.numOfVertical];
   
@@ -34,17 +34,17 @@ void aStar(Board _maze, MansonPlan _manson) {
 
   while (!queue.isEmpty()) {
     Node current = queue.poll();
-    println("aStar Searching...");
+    //println("aStar Searching...");
 
     if(visited[current.x][current.y]) {
-      println("aStar Searching...[visited]");
+      //println("aStar Searching...[visited]");
       continue;
     }
 
     visited[current.x][current.y] = true;
 
     if (current.x == _manson.target_x && current.y == _manson.target_y) {
-      println("aStar end Searching...");
+      //println("aStar end Searching...");
       printPath(current, _manson);
       return;
     }
@@ -64,7 +64,7 @@ void aStar(Board _maze, MansonPlan _manson) {
       { 
         Node nextNode = new Node(newX, newY, current.distance + 1, current);
         queue.add(nextNode);
-        println("aStar add Node");
+        //println("aStar add Node");
       }
     }
   }
@@ -86,7 +86,7 @@ void printPath(Node node, MansonPlan _manson) {
   if(path.size() > 1){
     moveX = path.get(1).x;
     moveY = path.get(1).y;
-    println("The secondary node = " + "[" + moveX + ", " + moveY + "]");
+    //println("The secondary node = " + "[" + moveX + ", " + moveY + "]");
     
      
     _manson.Action = 1;
@@ -119,9 +119,8 @@ void printPath(Node node, MansonPlan _manson) {
     myPanel.set_all_action_label();
   }else{
     _manson.Direction = 0;
-    _manson.real_action = "ARRIVED";
+    _manson.real_action = "";
 
-    
     if(_manson.checkPlannedWall_UP()){
       _manson.Direction = 2;
       if(contest_api.WallArray[_manson.current_x][_manson.current_y-1] == Wall_Type.GREEN_WALL){

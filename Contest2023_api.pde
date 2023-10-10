@@ -224,9 +224,6 @@ class Contest2023_api{
           }
         }
         
-        
-        
-        
         JSONArray manson = board.getJSONArray("masons");
         for (int i = 0; i < map_height; i++) {
           JSONArray rowArray = manson.getJSONArray(i);
@@ -261,11 +258,11 @@ class Contest2023_api{
       json.setJSONArray("actions", actionsArray);
       postReq.addHeader("Content-Type", "application/json");    // Set the request headers
       String jsonPayload = json.toString();
-      println("SEND:  " + jsonPayload);
+      //println("SEND:  " + jsonPayload);
       postReq.addData(jsonPayload);      // Set the request body with the JSON payload
       postReq.send();                    // Send the request and receive the response
       response = postReq.getContent();   // Get the response body
-      println("Response: " + response);  // Print the response
+      //println("Response: " + response);  // Print the response
   }
   
   int wall_count(Wall_Type _type){
