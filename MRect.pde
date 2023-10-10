@@ -1,5 +1,6 @@
 enum MRect_Type {
-  FREESPACE, POND, CASTLE, RED_MANSON, GREEN_MANSON, RED_WALL, RED_WALL_POND, GREEN_WALL, RED_TERRITORIES, GREEN_TERRITORIES, NULL;
+  FREESPACE, POND, CASTLE, RED_MANSON, GREEN_MANSON, RED_WALL, RED_WALL_POND, GREEN_WALL, GREEN_WALL_POND, 
+  RED_TERRITORIES, GREEN_TERRITORIES, PLANNED_WALL, NULL;
 }
 
 import controlP5.*;
@@ -46,7 +47,7 @@ class MRect {
   
   void setMRect_Type(MRect_Type _setType){
     rect_type = _setType;
-    CColor[] MRect_Color = new CColor[9];
+    CColor[] MRect_Color = new CColor[10];
     //Prepare the button color
     //A CColor instance contains the colors of foreground-, background-, active-, captionlabel- and valuelabel-colors. 
     //Reference: https://sojamo.de/libraries/controlP5/reference/controlP5/CColor.html
@@ -58,13 +59,15 @@ class MRect {
     MRect_Color[4] = new CColor(color(96,255,96), color(51, 255, 87), color(96,255,96), color(0), color(0));            //Green Manson
     MRect_Color[5] = new CColor(color(204,0,0), color(128, 0, 0), color(80, 0, 0), color(255), color(0,255,0));         //Red wall
     MRect_Color[6] = new CColor(color(51, 204, 51), color(0, 153, 51), color(0, 102, 0), color(255), color(255));       //Green Wall
-    MRect_Color[7] = new CColor(color(200), color(255,204,229), color(70), color(255), color(0,255,0));       //Red Territory
-    MRect_Color[8] = new CColor(color(200), color(229, 255, 204), color(70), color(255), color(0,255,0));       //Green Territory
+    MRect_Color[7] = new CColor(color(200), color(255,204,229), color(70), color(255), color(0));                       //Red Territory
+    MRect_Color[8] = new CColor(color(200), color(229, 255, 204), color(70), color(255), color(0));                     //Green Territory
+    MRect_Color[9] = new CColor(color(200), color(255, 153, 0), color(70), color(255), color(0));                       //Planned Wall
     
     
     switch(rect_type){
       case POND:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[1]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
         break;
       case CASTLE:
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[2]);
@@ -80,9 +83,8 @@ class MRect {
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[4]);
         break;
       case RED_WALL:
-        font = createFont("Courier New",8);
-        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[5]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
         break;
       case RED_WALL_POND:  
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[5]);
@@ -92,25 +94,32 @@ class MRect {
         myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);
         break;
       case GREEN_WALL:
-        font = createFont("Courier New",8);
-        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[6]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
+        break;
+      case GREEN_WALL_POND:  
+        myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[6]);
+        font = createFont("Courier New",40);
+        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
+        myCP5.getController(str(index_x) + "," + str(index_y)).setCaptionLabel("P");
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);
         break;
       case RED_TERRITORIES:
-        font = createFont("Courier New",8);
-        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[7]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
         break;
       case GREEN_TERRITORIES:
-        font = createFont("Courier New",8);
-        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[8]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
+        break;
+      case PLANNED_WALL:
+        myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[9]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);
         break;
       case FREESPACE:
       default:
-        font = createFont("Courier New",8);
-        myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[0]);
+        myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(false);
         break;
     }
     
@@ -133,11 +142,12 @@ class MRect {
     
     if (mouseButton == RIGHT)
     {
+      mouse_AI_move(index_x, index_y);
       println(" -----btn_click: " + str(index_x) + "," + str(index_y) + " <Right-click>");
     }
     else
     {
-      mouse_Record(index_x, index_y);
+      mouse_AI_build(index_x, index_y);
       println(" -----btn_click: " + str(index_x) + "," + str(index_y));
     }
      

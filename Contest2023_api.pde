@@ -45,7 +45,6 @@ class Contest2023_api{
   Manson[][] MansonArray = new Manson[25][25];                          //Collect the Manson information from server
   Territories_Type[][] TerritoriesArray = new Territories_Type[25][25]; //Collect the Territories information from server
   MansonPlan[] actionPlan = new MansonPlan[6];
-  //MansonPosition[] MansonPos = new MansonPosition[6];                   //Record all manson position
   
   Contest2023_api(){
     connection = false; 

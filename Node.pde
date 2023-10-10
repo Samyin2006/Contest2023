@@ -115,10 +115,62 @@ void printPath(Node node, MansonPlan _manson) {
       _manson.Direction = 5;
       _manson.real_action = "MOVE BOTTOM RIGHT";
     }
+    _manson.real_action = _manson.real_action + " (" + str(path.size()-1) + ")";
     myPanel.set_all_action_label();
   }else{
     _manson.Direction = 0;
     _manson.real_action = "ARRIVED";
+
+    
+    if(_manson.checkPlannedWall_UP()){
+      _manson.Direction = 2;
+      if(contest_api.WallArray[_manson.current_x][_manson.current_y-1] == Wall_Type.GREEN_WALL){
+        _manson.Action = 3;  
+        _manson.real_action = "Destroy UP";
+        println("Destroy Up!!!!");
+      }
+      else{
+        _manson.Action = 2;
+        _manson.real_action = "BUILD UP";
+        println("Build Up!!!!");
+      }
+    }else if(_manson.checkPlannedWall_RIGHT()){
+      _manson.Direction = 4;
+      if(contest_api.WallArray[_manson.current_x+1][_manson.current_y] == Wall_Type.GREEN_WALL){
+        _manson.Action = 3;  
+        _manson.real_action = "Destroy RIGHT";
+        println("Destroy RIGHT!!!!");
+      }
+      else{
+        _manson.Action = 2;
+        _manson.real_action = "BUILD RIGHT";
+        println("Build RIGHT!!!!");
+      }
+    }else if(_manson.checkPlannedWall_DOWN()){
+      _manson.Direction = 6;
+      if(contest_api.WallArray[_manson.current_x][_manson.current_y+1] == Wall_Type.GREEN_WALL){
+        _manson.Action = 3;  
+        _manson.real_action = "Destroy DOWN";
+        println("Destroy DOWN!!!!");
+      }
+      else{
+        _manson.Action = 2;
+        _manson.real_action = "BUILD DOWN";
+        println("Build DOWN!!!!");
+      }
+    }else if(_manson.checkPlannedWall_LEFT()){
+      _manson.Direction = 8;
+      if(contest_api.WallArray[_manson.current_x-1][_manson.current_y] == Wall_Type.GREEN_WALL){
+        _manson.Action = 3;  
+        _manson.real_action = "Destroy LEFT";
+        println("Destroy LEFT!!!!");
+      }
+      else{
+        _manson.Action = 2;
+        _manson.real_action = "BUILD LEFT";
+        println("Build LEFT!!!!");
+      }
+    }
     myPanel.set_all_action_label();
   }
 }
