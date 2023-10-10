@@ -19,7 +19,7 @@ class Contest2023_api{
   //String url = "http://58.152.160.7:3000";
   String url = "http://localhost:3000";
   //String token = "?token=" + "hongkongb6df0142c311d8d44169743c2f21a916ece310e82be067ed9dfa89b8";
-  String token = "?token=" + "1234";
+  String token = "?token=" + "0987";
   String initMatches_endpoint = url + "/matches" + token ;
   String inGame_Matches_endpoint;
   boolean connection;
@@ -118,10 +118,10 @@ class Contest2023_api{
         for (int i = 0; i < map_height; i++) {
           JSONArray rowArray = manson.getJSONArray(i);
           for (int j = 0; j < map_width; j++) {
-            if(match_isFirst)
+            //if(match_isFirst == true)
               MansonArray[j][i].manson_ID = rowArray.getInt(j);
-            else
-              MansonArray[j][i].manson_ID = rowArray.getInt(j)*(-1);
+            //else
+            //  MansonArray[j][i].manson_ID = rowArray.getInt(j)*(-1);
               
             if(MansonArray[j][i].manson_ID > 0)
               actionPlan[ MansonArray[j][i].manson_ID - 1 ].updatePosition(j,i);

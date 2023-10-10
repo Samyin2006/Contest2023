@@ -37,38 +37,38 @@ class ControlPanel{
     
     turns_label = controlPanel_CP5.addTextlabel("turns_label")
                                   .setText("00 / 00")
-                                  .setPosition(displayWidth-300, 20)
+                                  .setPosition(displayWidth-controlPanel_width, 20)
                                   .setColorValue(0xffffffff)
                                   .setFont(createFont("Arial",70))
                                   ;
     
     trunSecond_label = controlPanel_CP5.addTextlabel("turnsSecond_label")
                                   .setText("0.0 sec / 0.0 sec")
-                                  .setPosition(displayWidth-300, 100)
+                                  .setPosition(displayWidth-controlPanel_width, 100)
                                   .setColorValue(0xffffffff)
-                                  .setFont(createFont("Arial",30))
+                                  .setFont(createFont("Arial",40))
                                   ;
 
     match_id = controlPanel_CP5.addTextlabel("match_id")
                               .setText("ID: " + contest_api.match_id)
-                              .setPosition(displayWidth-300 , 150)
+                              .setPosition(displayWidth-controlPanel_width , 150)
                               .setColorValue(0xffffffff)
-                              .setFont(createFont("Arial",30))
+                              .setFont(createFont("Arial",40))
                               ;
 
     for(int i=0; i<6 ;i++){
       action_label[i] = controlPanel_CP5.addTextlabel("action_label" + str(i))
                                     .setText("")
-                                    .setPosition(displayWidth-300, (250+i*50))
+                                    .setPosition(displayWidth-controlPanel_width, (250+i*50))
                                     .setColorValue(0xffffffff)
-                                    .setFont(createFont("Arial",20))
+                                    .setFont(createFont("Arial",40))
                                     ;
       
       mansonPos_label[i] = controlPanel_CP5.addTextlabel("mansonPos_label" + str(i))
                                     .setText("")
-                                    .setPosition(displayWidth-400, (250+i*50))
+                                    .setPosition(displayWidth-controlPanel_width-100, (250+i*50))
                                     .setColorValue(0xffffffff)
-                                    .setFont(createFont("Arial",20))
+                                    .setFont(createFont("Arial",40))
                                     .setVisible(false);
                                     ;
       
@@ -78,27 +78,27 @@ class ControlPanel{
                               .setText("" + str(contest_api.wall_count(Wall_Type.GREEN_WALL)) + "\n"
                                           + str(contest_api.Territories_count(Territories_Type.GREEN_TERRITORIES)) + "\n"
                                           + str(contest_api.castle_count(Territories_Type.GREEN_TERRITORIES)) )
-                              .setPosition(displayWidth-50 , displayHeight-400)
+                              .setPosition(displayWidth-controlPanel_width+300 , displayHeight-400)
                               .setColorValue(color(0, 255, 0))
-                              .setFont(createFont("Courier New",20))
+                              .setFont(createFont("Courier New",40))
                               ;
                               
     allies_count = controlPanel_CP5.addTextlabel("allies_count")
                               .setText("" + str(contest_api.wall_count(Wall_Type.RED_WALL)) + "\n"
                                           + str(contest_api.Territories_count(Territories_Type.RED_TERRITORIES)) + "\n"
                                           + str(contest_api.castle_count(Territories_Type.RED_TERRITORIES)) )
-                              .setPosition(displayWidth-100 , displayHeight-400)
+                              .setPosition(displayWidth-controlPanel_width+200 , displayHeight-400)
                               .setColorValue(color(255, 0, 0))
-                              .setFont(createFont("Courier New",20))
+                              .setFont(createFont("Courier New",40))
                               ;
     
     bonus = controlPanel_CP5.addTextlabel("bonus")
                               .setText(   "W: " + contest_api.wallBonus + "\n"
                                         + "T: " + contest_api.territoryBonus +"\n"
                                         + "C: " + contest_api.castleBonus) 
-                              .setPosition(displayWidth-300 , displayHeight-400)
+                              .setPosition(displayWidth-controlPanel_width , displayHeight-400)
                               .setColorValue(0xffffffff)
-                              .setFont(createFont("Courier New",20))
+                              .setFont(createFont("Courier New",40))
                               ;
 
 
@@ -106,7 +106,7 @@ class ControlPanel{
     postbutton = controlPanel_CP5.addButton( "POST" ) //Create button with ID
                              .plugTo(this, "post_btn_click")                      //Link this button event to "btn_click" function
                              .setLock(false)
-                             .setPosition(displayWidth-300, displayHeight-80)              //Button position
+                             .setPosition(displayWidth-controlPanel_width, displayHeight-80)              //Button position
                              .setSize(250, 50)           //Button size
                              .setFont(font)                                  //Set font type and size
                              .getCaptionLabel()

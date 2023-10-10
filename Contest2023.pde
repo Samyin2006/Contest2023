@@ -1,5 +1,5 @@
 int BoxSize = 40;
-
+int controlPanel_width = 500;
 Board myBoard;
 ControlPanel myPanel;
 Contest2023_api contest_api;
@@ -20,7 +20,7 @@ void settings()
     BoxSize = (displayHeight) / (contest_api.map_height+2);
   }
   else{
-    BoxSize = (displayWidth - 300) / (contest_api.map_width+2);
+    BoxSize = (displayWidth - controlPanel_width) / (contest_api.map_width+2);
   }
   
   myBoard = new Board(this, contest_api.map_width, contest_api.map_height, BoxSize);
