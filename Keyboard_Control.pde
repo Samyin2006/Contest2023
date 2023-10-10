@@ -113,7 +113,7 @@ void keyReleased(){
     }
     else if (keyCode  == RIGHT){
       contest_api.actionPlan[manson_keyIn].Direction = 4;
-      if(contest_api.WallArray[pos_x-1][pos_y] == Wall_Type.GREEN_WALL){
+      if(contest_api.WallArray[pos_x+1][pos_y] == Wall_Type.GREEN_WALL){
         contest_api.actionPlan[manson_keyIn].Action = 3;  
         contest_api.actionPlan[manson_keyIn].real_action = "Destroy RIGHT";
         println("Destroy RIGHT!!!!");
