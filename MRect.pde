@@ -86,7 +86,7 @@ class MRect {
         break;
       case RED_WALL_POND:  
         myCP5.getController(str(index_x) + "," + str(index_y)).setColor(MRect_Color[5]);
-        font = createFont("Courier New",15);
+        font = createFont("Courier New",40);
         myCP5.getController(str(index_x) + "," + str(index_y)).setFont(font);
         myCP5.getController(str(index_x) + "," + str(index_y)).setCaptionLabel("P");
         myCP5.getController(str(index_x) + "," + str(index_y)).getCaptionLabel().setVisible(true);

@@ -78,7 +78,7 @@ class ControlPanel{
                               .setText("" + str(contest_api.wall_count(Wall_Type.GREEN_WALL)) + "\n"
                                           + str(contest_api.Territories_count(Territories_Type.GREEN_TERRITORIES)) + "\n"
                                           + str(contest_api.castle_count(Territories_Type.GREEN_TERRITORIES)) )
-                              .setPosition(displayWidth-50 , displayHeight-200)
+                              .setPosition(displayWidth-50 , displayHeight-400)
                               .setColorValue(color(0, 255, 0))
                               .setFont(createFont("Courier New",20))
                               ;
@@ -87,16 +87,16 @@ class ControlPanel{
                               .setText("" + str(contest_api.wall_count(Wall_Type.RED_WALL)) + "\n"
                                           + str(contest_api.Territories_count(Territories_Type.RED_TERRITORIES)) + "\n"
                                           + str(contest_api.castle_count(Territories_Type.RED_TERRITORIES)) )
-                              .setPosition(displayWidth-100 , displayHeight-200)
+                              .setPosition(displayWidth-100 , displayHeight-400)
                               .setColorValue(color(255, 0, 0))
                               .setFont(createFont("Courier New",20))
                               ;
     
     bonus = controlPanel_CP5.addTextlabel("bonus")
-                              .setText(   "Wall:      " + contest_api.wallBonus + "\n"
-                                        + "Territory: " + contest_api.territoryBonus +"\n"
-                                        + "Castle:    " + contest_api.castleBonus) 
-                              .setPosition(displayWidth-300 , displayHeight-200)
+                              .setText(   "W: " + contest_api.wallBonus + "\n"
+                                        + "T: " + contest_api.territoryBonus +"\n"
+                                        + "C: " + contest_api.castleBonus) 
+                              .setPosition(displayWidth-300 , displayHeight-400)
                               .setColorValue(0xffffffff)
                               .setFont(createFont("Courier New",20))
                               ;
