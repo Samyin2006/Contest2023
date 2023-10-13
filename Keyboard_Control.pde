@@ -7,7 +7,9 @@
 //
 void keyReleased(){
   //for external keypad
-  if(key >= 0xFFFF && keyCode != UP && keyCode != DOWN && keyCode != LEFT && keyCode != RIGHT )
+  if(key >= 0xFFFF && keyCode != UP && keyCode != DOWN && keyCode != LEFT && keyCode != RIGHT &&
+     ( key == 'z' || key == 'Z' || key == 'x' || key == 'X' || key == 'c' || key == 'C' || key == 'v' || key == 'V' ||
+       key == 'b' || key == 'B' || key == 'n' || key == 'N' ) )
     return;
     
   if (key == ENTER || key == RETURN) {
