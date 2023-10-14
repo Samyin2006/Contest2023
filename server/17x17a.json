@@ -13,8 +13,8 @@
       "castle": 100 
     },
     "board": {
-      "width": 25,
-      "height": 11,
+      "width": 17,
+      "height": 17,
       "mason": 4,
       "structures": [
       [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], 
