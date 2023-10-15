@@ -55,7 +55,7 @@ class MansonPlan{
   }
   
   boolean checkPlannedWall_UP(){
-    if(current_y-1 > 0){
+    if(current_y-1 >= 0){
       if(contest_api.WallArray[current_x][current_y-1] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x][current_y-1] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x][current_y-1] == Wall_Type.RED_WALL)
           return true;
@@ -77,7 +77,7 @@ class MansonPlan{
   }
   
   boolean checkPlannedWall_LEFT(){
-    if(current_x-1 > 0){
+    if(current_x-1 >= 0){
       if(contest_api.WallArray[current_x-1][current_y] != Wall_Type.RED_WALL && contest_api.StructuresArray[current_x-1][current_y] != Structure_Type.CASTLE){
         if(PlannedWallArray[current_x-1][current_y] == Wall_Type.RED_WALL)
           return true;
